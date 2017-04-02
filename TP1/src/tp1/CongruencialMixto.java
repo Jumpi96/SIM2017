@@ -24,6 +24,8 @@ public class CongruencialMixto {
         this.c = 999983; //Numero primo para asegurar que sea relativamente primo a m
         
         /*
+        Hull-Dobell Theorem:
+        
         m and the offset,c are relatively prime
         a-1 is divisible by all prime factors of m,
         a-1 is divisible by 4 if m is divisible by 4.

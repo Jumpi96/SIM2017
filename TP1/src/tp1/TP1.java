@@ -10,14 +10,23 @@ public class TP1 {
         
         Object[][] array=m.getNumeros(100);
         /*
-        for (int i = 0; i < array.length; i++) {
-            System.out.println(array[i][0]+"/" + (double)array[i][1] * 100);
+        for (int i = 0; i < array[0].length; i++) {
+            System.out.println(array[0][i]+"/" + array[1][i]);
         }*/
         
         Object[][] arreglo = n.getNumeros(100);
+        System.out.println("");
+        System.out.println("");
+        System.out.println("");
+        /*
+        for (int i = 0; i < array[0].length; i++) {
+            System.out.println(arreglo[0][i]+"/" + arreglo[1][i]);
+        }*/
         
-        for (int i = 0; i < arreglo.length; i++) {
-            System.out.println((int)((double)arreglo[i][1] * 100));
+        for (int i = 0; i < array[0].length; i++) {
+            System.out.println((int)((double)arreglo[1][i]*100));
         }
+        
+        
     }
 }

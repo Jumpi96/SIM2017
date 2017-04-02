@@ -40,14 +40,14 @@ public class CongruencialMixto {
     
     //Retorna matriz con numeros en columna 0 y randoms en columna 1
     public Object[][] getNumeros(int cantidad) {
-        Object[][] numeros = new Object[cantidad][2];
+        Object[][] numeros = new Object[2][cantidad];
 
         double xi = this.seed;
 
         for (int i = 0; i < cantidad; i++) {
             xi = (a * xi + c) % m;
-            numeros[i][0] = (int) xi;
-            numeros[i][1] = xi / (m - 1);
+            numeros[0][i] = (long) xi;
+            numeros[1][i] = xi / (m - 1);
         }
         return numeros;
     }

@@ -2,7 +2,7 @@ package tp1;
 
 public class CongruencialMixto {
 
-    private int a, c, m;
+    private long a, c, m;
     //private int k, g;
     private int seed;
 
@@ -17,33 +17,26 @@ public class CongruencialMixto {
     }*/
 
     //Configuracion por usuario optima
-    public CongruencialMixto(int seed, int g, int a) {
+    public CongruencialMixto(int seed, int g, int k) {
         this.seed = seed;
-        this.m = (int) Math.pow(2, g);
-        this.a = a;
-        this.c = (8 * this.a) + 3;
+        this.m = (long) Math.pow(2, g);
+        this.a = 1 + (4 * k);
+        this.c = 999983; //Numero primo para asegurar que sea relativamente primo a m
         
+        /*
+        m and the offset,c are relatively prime
+        a-1 is divisible by all prime factors of m,
+        a-1 is divisible by 4 if m is divisible by 4.
+        */
     }
     
     //Configuracion Optima
     public CongruencialMixto() {
-        this.seed = 17;
-        this.a = 127;
-        this.c = (8 * this.a) + 3;
-        this.m = (int) Math.pow(2, 15);
+        this.seed = 12345;
+        this.m = (long) Math.pow(2, 32);
+        this.a = 1 + (416131 * 4);
+        this.c = 999983;
     }
-
-    /*
-     · a debe ser un número impar, no divisible ni por 3 ni por 5.
-     · m debe ser el número entero más grande que la computadora acepte.
-     De acuerdo con Hull y Dobell, los mejores resultados para un generador
-     congruencial mixto en una computadora binaria son:
-     · c = 8*a±3
-     · a = cualquier entero
-     · X0 = Cualquier entero impar.
-     · M = 2^b donde b >2 y que m sea aceptado por la computadora.
-     */
-    
     
     //Retorna matriz con numeros en columna 0 y randoms en columna 1
     public Object[][] getNumeros(int cantidad) {
@@ -59,3 +52,5 @@ public class CongruencialMixto {
         return numeros;
     }
 }
+
+

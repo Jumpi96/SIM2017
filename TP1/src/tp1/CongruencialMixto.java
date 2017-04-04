@@ -5,7 +5,7 @@ public class CongruencialMixto {
     private long a, c, m;
     //private int k, g;
     private int seed;
-
+    
     //Configuracion por usuario
     /*public CongruencialMixto(int a, int c, int m, int k, int g, int seed) {
         this.a = a;
@@ -19,7 +19,8 @@ public class CongruencialMixto {
     //Configuracion por usuario optima
     public CongruencialMixto(int seed, int g, int k) {
         this.seed = seed;
-        this.m = (long) Math.pow(2, g);
+        //this.m = (long) Math.pow(2, g);
+        this.m = g;
         this.a = 1 + (4 * k);
         this.c = 999983; //Numero primo para asegurar que sea relativamente primo a m
         

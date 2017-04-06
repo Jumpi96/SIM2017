@@ -18,6 +18,8 @@ public class GUI extends javax.swing.JFrame {
         validoSemilla = false;
         validoA = false;
         validoC = false;
+        btnReiniciar.setEnabled(false);
+        btnSiguiente.setEnabled(false);
     }
 
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -39,6 +41,7 @@ public class GUI extends javax.swing.JFrame {
         chkOptima = new javax.swing.JCheckBox();
         btnSiguiente = new javax.swing.JButton();
         btnGenerar = new javax.swing.JButton();
+        btnReiniciar = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         listNumeros = new javax.swing.JList();
         jPanel1 = new javax.swing.JPanel();
@@ -135,6 +138,13 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        btnReiniciar.setText("Reiniciar");
+        btnReiniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReiniciarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -160,14 +170,16 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(txtA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                             .addComponent(txtC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                             .addComponent(cmbMetodo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(chkOptima))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSiguiente)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(135, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chkOptima, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(btnReiniciar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSiguiente)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -199,7 +211,8 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSiguiente)
-                    .addComponent(btnGenerar))
+                    .addComponent(btnGenerar)
+                    .addComponent(btnReiniciar))
                 .addGap(101, 101, 101))
         );
 
@@ -222,7 +235,7 @@ public class GUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 296, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -499,8 +512,18 @@ public class GUI extends javax.swing.JFrame {
                 for (int i = 0; i < array[1].length; i++) {
                     listaNumeros.addElement((int) ((double) array[1][i] * 10000));
                 }
+                
                 listNumeros.setModel(listaNumeros);
+                btnGenerar.setEnabled(false);
+                txtSemilla.setEnabled(false);
+                txtM.setEnabled(false);
+                txtC.setEnabled(false);
+                txtA.setEnabled(false);
+                cmbMetodo.setEnabled(false);
+                chkOptima.setEnabled(false);
 
+                btnReiniciar.setEnabled(true);
+                btnSiguiente.setEnabled(true);
             }
 
         } catch (Error er) {
@@ -542,6 +565,33 @@ public class GUI extends javax.swing.JFrame {
         }
         listNumeros.setModel(listaNumeros);
     }//GEN-LAST:event_btnSiguienteActionPerformed
+
+    private void btnReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarActionPerformed
+        validoM = false;
+        validoSemilla = false;
+        validoA = false;
+        validoC = false;
+
+        txtSemilla.setText("Ingrese Semilla");
+        txtM.setText("Ingrese la constante m");
+        txtA.setText("Ingrese la constante a");
+        txtC.setText("Ingrese la constante c");
+
+        listNumeros.setModel(new DefaultListModel());
+        btnGenerar.setEnabled(true);
+        txtSemilla.setEnabled(true);
+        txtM.setEnabled(true);
+        txtC.setEnabled(true);
+        txtA.setEnabled(true);
+        cmbMetodo.setEnabled(true);
+        chkOptima.setEnabled(true);
+        chkOptima.setSelected(false);
+        
+        
+        btnReiniciar.setEnabled(false);
+        btnSiguiente.setEnabled(false);
+
+    }//GEN-LAST:event_btnReiniciarActionPerformed
 
     private boolean validarCampos() {
         return (validoSemilla && validoM && validoA && validoC);
@@ -589,6 +639,7 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerar;
+    private javax.swing.JButton btnReiniciar;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JCheckBox chkOptima;
     private javax.swing.JComboBox<String> cmbMetodo;

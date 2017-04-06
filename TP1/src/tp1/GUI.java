@@ -4,15 +4,16 @@ import javax.swing.DefaultListModel;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import sun.swing.SwingAccessor;
 
 public class GUI extends javax.swing.JFrame {
 
     public GUI() {
         initComponents();
-        
+
         congruencialMixto = new CongruencialMixto();
-        
+
         validoM = false;
         validoSemilla = false;
         validoA = false;
@@ -22,7 +23,6 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
@@ -37,6 +37,7 @@ public class GUI extends javax.swing.JFrame {
         lblA = new javax.swing.JLabel();
         lblC = new javax.swing.JLabel();
         chkOptima = new javax.swing.JCheckBox();
+        btnSiguiente = new javax.swing.JButton();
         btnGenerar = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         listNumeros = new javax.swing.JList();
@@ -48,16 +49,8 @@ public class GUI extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable3 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jButton1.setText("Siguiente");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         jTabbedPane1.setEnabled(false);
 
@@ -128,6 +121,13 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        btnSiguiente.setText("Siguiente");
+        btnSiguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSiguienteActionPerformed(evt);
+            }
+        });
+
         btnGenerar.setText("Generar");
         btnGenerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,9 +142,6 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(chkOptima))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(79, 79, 79)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
@@ -153,7 +150,7 @@ public class GUI extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblC, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(lblM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+                                    .addComponent(lblM, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblMetodo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lblSemilla, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGap(16, 16, 16)))
@@ -163,15 +160,20 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(txtA, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                             .addComponent(txtC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                             .addComponent(cmbMetodo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(chkOptima))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnGenerar)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnSiguiente)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGenerar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(45, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -192,11 +194,13 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblC))
-                .addGap(27, 27, 27)
+                .addGap(18, 18, 18)
                 .addComponent(chkOptima)
-                .addGap(38, 38, 38)
-                .addComponent(btnGenerar)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSiguiente)
+                    .addComponent(btnGenerar))
+                .addGap(101, 101, 101))
         );
 
         jScrollPane4.setViewportView(listNumeros);
@@ -210,19 +214,16 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46))
+                .addGap(21, 21, 21))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Programa A", jPanel2);
@@ -266,7 +267,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,7 +279,7 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Programa B", jPanel1);
@@ -322,7 +323,7 @@ public class GUI extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,46 +335,34 @@ public class GUI extends javax.swing.JFrame {
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Programa C", jPanel4);
-
-        jButton2.setText("Anterior");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 14, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap())
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     // <editor-fold defaultstate="collapsed" desc="CONTROL DE TEXT FIELDS">   
     private void txtSemillaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtSemillaFocusGained
-        if (!validoSemilla)txtSemilla.setText("");
+        if (!validoSemilla) {
+            txtSemilla.setText("");
+        }
 
         txtSemilla.setInputVerifier(new InputVerifier() {
             public boolean verify(JComponent input) {
@@ -441,7 +430,9 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCKeyTyped
 
     private void txtMFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMFocusGained
-        if (!validoM) txtM.setText("");
+        if (!validoM) {
+            txtM.setText("");
+        }
 
         txtM.setInputVerifier(new InputVerifier() {
             public boolean verify(JComponent input) {
@@ -456,7 +447,9 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMFocusGained
 
     private void txtAFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAFocusGained
-        if (!validoA)txtA.setText("");
+        if (!validoA) {
+            txtA.setText("");
+        }
 
         txtA.setInputVerifier(new InputVerifier() {
             public boolean verify(JComponent input) {
@@ -471,7 +464,9 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAFocusGained
 
     private void txtCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCFocusGained
-        if (!validoC)txtC.setText("");
+        if (!validoC) {
+            txtC.setText("");
+        }
 
         txtC.setInputVerifier(new InputVerifier() {
             public boolean verify(JComponent input) {
@@ -489,64 +484,70 @@ public class GUI extends javax.swing.JFrame {
 
         try {
             if (!chkOptima.isSelected() && !validarCampos()) {
-            
-            } 
-            else {
+
+            } else {
                 if (!chkOptima.isSelected() && validarCampos()) {
                     congruencialMixto.setSeed(Integer.parseInt(txtSemilla.getText()));
                     congruencialMixto.setM(Integer.parseInt(txtM.getText()));
                     congruencialMixto.setA(Integer.parseInt(txtA.getText()));
                     congruencialMixto.setC(Integer.parseInt(txtC.getText()));
                 }
-                
+
                 DefaultListModel listaNumeros = new DefaultListModel();
                 Object[][] array = congruencialMixto.getNumeros(20);
 
-                for (int i = 0; i < 20; i++) {
+                for (int i = 0; i < array[1].length; i++) {
                     listaNumeros.addElement((int) ((double) array[1][i] * 10000));
                 }
                 listNumeros.setModel(listaNumeros);
+
             }
 
-            
         } catch (Error er) {
-         
+
         }
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void chkOptimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkOptimaActionPerformed
-            if (chkOptima.isSelected()) {
-                txtSemilla.setText("Ingrese Semilla");
-                txtM.setText("Ingrese la constante m");
-                txtA.setText("Ingrese la constante a");
-                txtC.setText("Ingrese la constante c");
-                
-                txtSemilla.setEnabled(false);
-                txtM.setEnabled(false);
-                txtA.setEnabled(false);
-                txtC.setEnabled(false);
-                
-                validoM = false;
-                validoSemilla = false;
-                validoA = false;
-                validoC = false;
-                
-            } else {
-                txtSemilla.setEnabled(true);
-                txtM.setEnabled(true);
-                txtA.setEnabled(true);
-                txtC.setEnabled(true);
-            }
+        if (chkOptima.isSelected()) {
+            txtSemilla.setText("Ingrese Semilla");
+            txtM.setText("Ingrese la constante m");
+            txtA.setText("Ingrese la constante a");
+            txtC.setText("Ingrese la constante c");
+
+            txtSemilla.setEnabled(false);
+            txtM.setEnabled(false);
+            txtA.setEnabled(false);
+            txtC.setEnabled(false);
+
+            validoM = false;
+            validoSemilla = false;
+            validoA = false;
+            validoC = false;
+
+        } else {
+            txtSemilla.setEnabled(true);
+            txtM.setEnabled(true);
+            txtA.setEnabled(true);
+            txtC.setEnabled(true);
+        }
     }//GEN-LAST:event_chkOptimaActionPerformed
+
+    private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
+        DefaultListModel listaNumeros = new DefaultListModel();
+        Object[][] array = congruencialMixto.getNumeros(listNumeros.getModel().getSize() + 1);
+
+        for (int i = 0; i < array[1].length; i++) {
+            listaNumeros.addElement((int) ((double) array[1][i] * 10000));
+        }
+        listNumeros.setModel(listaNumeros);
+    }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private boolean validarCampos() {
         return (validoSemilla && validoM && validoA && validoC);
     }
 
     // </editor-fold> 
-    
-    
-    
     public static void main(String args[]) {
 
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -588,10 +589,9 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerar;
+    private javax.swing.JButton btnSiguiente;
     private javax.swing.JCheckBox chkOptima;
     private javax.swing.JComboBox<String> cmbMetodo;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;

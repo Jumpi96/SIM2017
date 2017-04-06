@@ -22,7 +22,7 @@ Recibe datos en matriz de dos columnas (0: etiquetas; 1: cantidad) y guarda
 con método Graficar() un .jpg.
 */
 public class GraficoBarra {
-    
+    /*
     private final Object[][] datos;
 
     public GraficoBarra(Object[][] datos) {
@@ -47,5 +47,5 @@ public class GraficoBarra {
       int height = 480;  
       File BarChart = new File( "GraficoBarra.jpeg" ); 
       ChartUtilities.saveChartAsJPEG( BarChart , barChart , width , height );
-   }
+   }*/
 }

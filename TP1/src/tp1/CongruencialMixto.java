@@ -3,26 +3,55 @@ package tp1;
 public class CongruencialMixto {
 
     private long a, c, m;
-    //private int k, g;
     private int seed;
     
-    //Configuracion por usuario
-    /*public CongruencialMixto(int a, int c, int m, int k, int g, int seed) {
+    public CongruencialMixto(int seed, int m, int a, int c) {
+        this.seed = seed;
+        this.m = m;
         this.a = a;
         this.c = c;
-        this.m = m;
-        this.k = k;
-        this.g = g;
-        this.seed = seed;
-    }*/
+    }
 
-    //Configuracion por usuario optima
-    public CongruencialMixto(int seed, int g, int k) {
+    public long getA() {
+        return a;
+    }
+
+    public void setA(long a) {
+        this.a = a;
+    }
+
+    public long getC() {
+        return c;
+    }
+
+    public void setC(long c) {
+        this.c = c;
+    }
+
+    public long getM() {
+        return m;
+    }
+
+    public void setM(long m) {
+        this.m = m;
+    }
+
+    public int getSeed() {
+        return seed;
+    }
+
+    public void setSeed(int seed) {
         this.seed = seed;
-        //this.m = (long) Math.pow(2, g);
-        this.m = g;
-        this.a = 1 + (4 * k);
-        this.c = 999983; //Numero primo para asegurar que sea relativamente primo a m
+    }
+    
+    
+    
+    //Configuracion Optima
+    public CongruencialMixto() {
+        this.seed = 12345;
+        this.m = (long) Math.pow(2, 32);
+        this.a = 1 + (416131 * 4);
+        this.c = 999983;
         
         /*
         Hull-Dobell Theorem:
@@ -31,14 +60,6 @@ public class CongruencialMixto {
         a-1 is divisible by all prime factors of m,
         a-1 is divisible by 4 if m is divisible by 4.
         */
-    }
-    
-    //Configuracion Optima
-    public CongruencialMixto() {
-        this.seed = 12345;
-        this.m = (long) Math.pow(2, 32);
-        this.a = 1 + (416131 * 4);
-        this.c = 999983;
     }
     
     //Retorna matriz con numeros en columna 0 y randoms en columna 1

@@ -12,8 +12,6 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
 
-        congruencialMixto = new CongruencialMixto();
-
         validoM = false;
         validoSemilla = false;
         validoA = false;
@@ -106,6 +104,11 @@ public class GUI extends javax.swing.JFrame {
         });
 
         cmbMetodo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Congruencial Mixto", "Congruencial Multiplicativo" }));
+        cmbMetodo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbMetodoActionPerformed(evt);
+            }
+        });
 
         lblSemilla.setText("Ingrese la Semilla:");
 
@@ -494,20 +497,26 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCFocusGained
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-
+        
         try {
             if (!chkOptima.isSelected() && !validarCampos()) {
 
             } else {
+                if(cmbMetodo.getSelectedItem().toString().compareToIgnoreCase("congruencial mixto") == 0){
+                    congruencial = new CongruencialMixto();
+                }else if(cmbMetodo.getSelectedItem().toString().compareToIgnoreCase("congruencial multiplicativo") == 0){
+                    congruencial = new CongruencialMultiplicativo();
+                }
+                        
                 if (!chkOptima.isSelected() && validarCampos()) {
-                    congruencialMixto.setSeed(Integer.parseInt(txtSemilla.getText()));
-                    congruencialMixto.setM(Integer.parseInt(txtM.getText()));
-                    congruencialMixto.setA(Integer.parseInt(txtA.getText()));
-                    congruencialMixto.setC(Integer.parseInt(txtC.getText()));
+                    congruencial.setSeed(Integer.parseInt(txtSemilla.getText()));
+                    congruencial.setM(Integer.parseInt(txtM.getText()));
+                    congruencial.setA(Integer.parseInt(txtA.getText()));
+                    congruencial.setC(Integer.parseInt(txtC.getText()));
                 }
 
                 DefaultListModel listaNumeros = new DefaultListModel();
-                Object[][] array = congruencialMixto.getNumeros(20);
+                Object[][] array = congruencial.getNumeros(20);
 
                 for (int i = 0; i < array[1].length; i++) {
                     listaNumeros.addElement((int) ((double) array[1][i] * 10000));
@@ -558,7 +567,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void btnSiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSiguienteActionPerformed
         DefaultListModel listaNumeros = new DefaultListModel();
-        Object[][] array = congruencialMixto.getNumeros(listNumeros.getModel().getSize() + 1);
+        Object[][] array = congruencial.getNumeros(listNumeros.getModel().getSize() + 1);
 
         for (int i = 0; i < array[1].length; i++) {
             listaNumeros.addElement((int) ((double) array[1][i] * 10000));
@@ -567,8 +576,6 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarActionPerformed
-        congruencialMixto = new CongruencialMixto();
-        
         validoM = false;
         validoSemilla = false;
         validoA = false;
@@ -594,6 +601,16 @@ public class GUI extends javax.swing.JFrame {
         btnSiguiente.setEnabled(false);
 
     }//GEN-LAST:event_btnReiniciarActionPerformed
+
+    private void cmbMetodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMetodoActionPerformed
+        if (cmbMetodo.getItemCount() == 0){
+            
+            
+        }else if(cmbMetodo.getItemCount() == 1){
+            
+        }
+        
+    }//GEN-LAST:event_cmbMetodoActionPerformed
 
     private boolean validarCampos() {
         return (validoSemilla && validoM && validoA && validoC);
@@ -631,8 +648,8 @@ public class GUI extends javax.swing.JFrame {
         });
     }
 
-    private CongruencialMixto congruencialMixto;
-
+    private Congruencial congruencial;
+    
     private boolean validoM;
     private boolean validoSemilla;
     private boolean validoA;

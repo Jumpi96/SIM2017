@@ -1,24 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package tp1;
 
-/**
- *
- * @author Juan Matias
- */
-public class CongruencialMultiplicativo {
-    private long a, c, m;
+public class CongruencialMultiplicativo implements Congruencial{
+    private long a, m;
     private int seed;
     
     public CongruencialMultiplicativo(int seed, int m, int a, int c) {
         this.seed = seed;
         this.m = m;
         this.a = a;
-        this.c = c;
     }
 
     public long getA() {
@@ -29,12 +18,8 @@ public class CongruencialMultiplicativo {
         this.a = a;
     }
 
-    public long getC() {
-        return c;
-    }
-
     public void setC(long c) {
-        this.c = c;
+        
     }
 
     public long getM() {
@@ -55,20 +40,13 @@ public class CongruencialMultiplicativo {
     
     
     
+    
+        
     //Configuracion Optima
     public CongruencialMultiplicativo() {
         this.seed = 127;
         this.m = (long) Math.pow(2, 32);
         this.a = 1 + (416131 * 8);
-        this.c = 999983;
-        
-        /*
-        Hull-Dobell Theorem:
-        
-        m and the offset,c are relatively prime
-        a-1 is divisible by all prime factors of m,
-        a-1 is divisible by 4 if m is divisible by 4.
-        */
     }
     
     //Retorna matriz con numeros en columna 0 y randoms en columna 1

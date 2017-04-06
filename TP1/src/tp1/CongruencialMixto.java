@@ -1,6 +1,6 @@
 package tp1;
 
-public class CongruencialMixto {
+public class CongruencialMixto implements Congruencial{
 
     private long a, c, m;
     private int seed;

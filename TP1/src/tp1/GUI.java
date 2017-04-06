@@ -567,6 +567,8 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSiguienteActionPerformed
 
     private void btnReiniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReiniciarActionPerformed
+        congruencialMixto = new CongruencialMixto();
+        
         validoM = false;
         validoSemilla = false;
         validoA = false;

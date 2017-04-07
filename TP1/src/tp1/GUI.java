@@ -12,15 +12,13 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
 
-        
-        
         validoM = false;
         validoSemilla = false;
         validoA = false;
         validoC = false;
         validoCantB = false;
         validoCantC = false;
-        
+
         btnReiniciar.setEnabled(false);
         btnSiguiente.setEnabled(false);
     }
@@ -563,17 +561,17 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCFocusGained
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-        
+
         try {
             if (!chkOptima.isSelected() && !validarCampos()) {
 
             } else {
-                if(cmbMetodo.getSelectedItem().toString().compareToIgnoreCase("congruencial mixto") == 0){
+                if (cmbMetodo.getSelectedItem().toString().compareToIgnoreCase("congruencial mixto") == 0) {
                     congruencial = new CongruencialMixto();
-                }else if(cmbMetodo.getSelectedItem().toString().compareToIgnoreCase("congruencial multiplicativo") == 0){
+                } else if (cmbMetodo.getSelectedItem().toString().compareToIgnoreCase("congruencial multiplicativo") == 0) {
                     congruencial = new CongruencialMultiplicativo();
                 }
-                        
+
                 if (!chkOptima.isSelected() && validarCampos()) {
                     congruencial.setSeed(Integer.parseInt(txtSemilla.getText()));
                     congruencial.setM(Integer.parseInt(txtM.getText()));
@@ -587,7 +585,7 @@ public class GUI extends javax.swing.JFrame {
                 for (int i = 0; i < array[1].length; i++) {
                     listaNumeros.addElement((int) ((double) array[1][i] * 10000));
                 }
-                
+
                 listNumeros.setModel(listaNumeros);
                 btnGenerar.setEnabled(false);
                 txtSemilla.setEnabled(false);
@@ -662,7 +660,7 @@ public class GUI extends javax.swing.JFrame {
         cmbMetodo.setEnabled(true);
         chkOptima.setEnabled(true);
         chkOptima.setSelected(false);
-        
+
         jTabbedPane1.setEnabled(false);
         btnReiniciar.setEnabled(false);
         btnSiguiente.setEnabled(false);
@@ -684,7 +682,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void txtCantidadNumerosCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCantidadNumerosCFocusGained
         if (!validoCantC) {
-           txtCantidadNumerosC.setText("");
+            txtCantidadNumerosC.setText("");
         }
 
         txtCantidadNumerosC.setInputVerifier(new InputVerifier() {
@@ -730,32 +728,104 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCantidadNumerosBKeyTyped
 
     private void btnGenerarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarBActionPerformed
-        if (validoCantB){
+        if (validoCantB) {
             DefaultListModel listaNumeros = new DefaultListModel();
-            
-            for (int i = 0; i < Integer.parseInt(txtCantidadNumerosB.getText()); i++) {
-                int a = (int)(Math.random()*10000);
-                listaNumeros.addElement((float)a/10000);
+            int cantidadIntervalos = Integer.parseInt(cmbIntervalosB.getSelectedItem().toString());
+            String etiquetas[] = new String[cantidadIntervalos + 1];
+            float intervalos[] = new float[cantidadIntervalos + 1];
+            int valores[] = new int[cantidadIntervalos + 1];
+
+            for (int i = 0; i <= cantidadIntervalos; i++) {
+                valores[i] = 0;
             }
-            
+
+            for (int i = 0; i <= cantidadIntervalos; i++) {
+                etiquetas[i] = "" + ((float) 1 / cantidadIntervalos) * (i) + " - " + ((float) 1 / cantidadIntervalos) * (i + 1);
+            }
+
+            for (int i = 0; i <= cantidadIntervalos; i++) {
+                intervalos[i] = ((float) 1 / cantidadIntervalos) * (i);
+            }
+
+            for (Object etiqueta : etiquetas) {
+                System.out.println("" + etiqueta.toString());
+            }
+
+            for (int i = 0; i < Integer.parseInt(txtCantidadNumerosB.getText()); i++) {
+                int a = (int) (Math.random() * 10000);
+                float b = (float) a / 10000;
+                listaNumeros.addElement(b);
+
+                for (int j = 0; j < etiquetas.length; j++) {
+                    if (b >= intervalos[j] && b < intervalos[j + 1]) {
+                        valores[j] = valores[j] + 1;
+                    }
+                }
+            }
+
             listNumerosB.setModel(listaNumeros);
-                
-            
+
+            GraficoBarra2 graficoBarra = new GraficoBarra2(etiquetas, valores);
+
+            try {
+                graficoBarra.graficar();
+
+            } catch (Exception exc) {
+
+            }
+
         }
     }//GEN-LAST:event_btnGenerarBActionPerformed
 
     private void btnGenerarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarCActionPerformed
-        if (validoCantC){
+        if (validoCantC) {
             DefaultListModel listaNumeros = new DefaultListModel();
             Object[][] array = congruencial.getNumeros(Integer.parseInt(txtCantidadNumerosC.getText()));
-            
-            for (int i = 0; i < array[1].length; i++) {
-                int a = (int)((double)array[1][i]*10000);
-                listaNumeros.addElement((float)a/10000);
+
+            int cantidadIntervalos = Integer.parseInt(cmbIntervalosC.getSelectedItem().toString());
+            String etiquetas[] = new String[cantidadIntervalos + 1];
+            float intervalos[] = new float[cantidadIntervalos + 1];
+            int valores[] = new int[cantidadIntervalos + 1];
+
+            for (int i = 0; i <= cantidadIntervalos; i++) {
+                valores[i] = 0;
             }
-            
+
+            for (int i = 0; i <= cantidadIntervalos; i++) {
+                etiquetas[i] = "" + ((float) 1 / cantidadIntervalos) * (i) + " - " + ((float) 1 / cantidadIntervalos) * (i + 1);
+            }
+
+            for (int i = 0; i <= cantidadIntervalos; i++) {
+                intervalos[i] = ((float) 1 / cantidadIntervalos) * (i);
+            }
+
+            for (Object etiqueta : etiquetas) {
+                System.out.println("" + etiqueta.toString());
+            }
+
+            for (int i = 0; i < array[1].length; i++) {
+                int a = (int) ((double) array[1][i] * 10000);
+                float b = (float) a / 10000;
+                listaNumeros.addElement(b);
+
+                for (int j = 0; j < etiquetas.length; j++) {
+                    if (b >= intervalos[j] && b < intervalos[j + 1]) {
+                        valores[j] = valores[j] + 1;
+                    }
+                }
+
+            }
+
             listNumerosC.setModel(listaNumeros);
-            
+
+            GraficoBarra2 graficoBarra = new GraficoBarra2(etiquetas, valores);
+
+            try {
+                graficoBarra.graficar();
+
+            } catch (Exception exc) {
+                System.out.println("mal");
+            }
         }
     }//GEN-LAST:event_btnGenerarCActionPerformed
 
@@ -794,14 +864,9 @@ public class GUI extends javax.swing.JFrame {
             }
         });
     }
-    
-    private void cargarListaB(){
-        
-    }
-    
 
     private Congruencial congruencial;
-    
+
     private boolean validoM;
     private boolean validoSemilla;
     private boolean validoA;

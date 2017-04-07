@@ -12,20 +12,22 @@ import org.jfree.chart.ChartUtilities;
 Recibe datos en matriz de dos columnas (0: etiquetas; 1: cantidad) y guarda
 con método Graficar() un .jpg.
 */
-public class GraficoBarra {
+public class GraficoBarra2 {
     
-    private final Object[][] datos;
+    private final String[] etiquetas;
+    private final int[] valores;
 
-    public GraficoBarra(Object[][] datos) {
-        this.datos = datos;
+    public GraficoBarra2(String[] etiquetas, int[] valores) {
+        this.etiquetas = etiquetas;
+        this.valores = valores;
     }
    
     public void graficar() throws Exception {
 
       final DefaultCategoryDataset dataset = new DefaultCategoryDataset( );
       
-        for (Object[] dato : datos) {
-            dataset.addValue((Integer) dato[1], "", (String) dato[0]);
+        for (int i = 0; i < valores.length; i++) {
+            dataset.addValue(valores[i], "Cantidad de Apariciones", etiquetas[i]);
         }
 
       JFreeChart barChart = ChartFactory.createBarChart(
@@ -34,7 +36,7 @@ public class GraficoBarra {
          dataset,PlotOrientation.VERTICAL, 
          true, true, false);
          
-      int width = 640; 
+      int width = 1640; 
       int height = 480;  
       File BarChart = new File( "GraficoBarra.jpeg" ); 
       ChartUtilities.saveChartAsJPEG( BarChart , barChart , width , height );

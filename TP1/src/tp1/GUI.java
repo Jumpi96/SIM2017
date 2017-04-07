@@ -12,10 +12,15 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
 
+        
+        
         validoM = false;
         validoSemilla = false;
         validoA = false;
         validoC = false;
+        validoCantB = false;
+        validoCantC = false;
+        
         btnReiniciar.setEnabled(false);
         btnSiguiente.setEnabled(false);
     }
@@ -43,13 +48,24 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane4 = new javax.swing.JScrollPane();
         listNumeros = new javax.swing.JList();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        lblIntervalosB = new javax.swing.JLabel();
+        txtCantidadNumerosB = new javax.swing.JTextField();
+        cmbIntervalosB = new javax.swing.JComboBox();
+        btnGenerarB = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        listNumerosB = new javax.swing.JList();
+        graficoB = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        lblIntervalosC = new javax.swing.JLabel();
+        txtCantidadNumerosC = new javax.swing.JTextField();
+        cmbIntervalosC = new javax.swing.JComboBox();
+        btnGenerarC = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        listNumerosC = new javax.swing.JList();
+        graficoC = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,11 +120,6 @@ public class GUI extends javax.swing.JFrame {
         });
 
         cmbMetodo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Congruencial Mixto", "Congruencial Multiplicativo" }));
-        cmbMetodo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbMetodoActionPerformed(evt);
-            }
-        });
 
         lblSemilla.setText("Ingrese la Semilla:");
 
@@ -174,7 +185,7 @@ public class GUI extends javax.swing.JFrame {
                             .addComponent(txtC, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                             .addComponent(cmbMetodo, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addContainerGap(135, Short.MAX_VALUE)
+                        .addContainerGap(188, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(chkOptima, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
@@ -189,22 +200,21 @@ public class GUI extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbMetodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblMetodo))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtSemilla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblSemilla))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblM))
-                        .addGap(18, 18, 18)
-                        .addComponent(txtA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblA, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbMetodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMetodo))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtSemilla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSemilla))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtM, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblM))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblA))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -244,114 +254,170 @@ public class GUI extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Programa A", jPanel2);
 
-        jLabel1.setText("IMAGEN");
+        lblIntervalosB.setText("Cantidad de Intervalos: ");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Números"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        txtCantidadNumerosB.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        txtCantidadNumerosB.setText("Cantidad de Números Aleatorios a generar");
+        txtCantidadNumerosB.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCantidadNumerosBFocusGained(evt);
             }
         });
-        jScrollPane2.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setResizable(false);
-        }
+        txtCantidadNumerosB.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadNumerosBKeyTyped(evt);
+            }
+        });
+
+        cmbIntervalosB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "10", "15", "20" }));
+
+        btnGenerarB.setText("Generar");
+        btnGenerarB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarBActionPerformed(evt);
+            }
+        });
+
+        jScrollPane5.setViewportView(listNumerosB);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnGenerarB)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addComponent(lblIntervalosB, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(cmbIntervalosB, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCantidadNumerosB, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(graficoB, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(graficoB, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblIntervalosB)
+                            .addComponent(cmbIntervalosB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCantidadNumerosB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGenerarB)))
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addContainerGap(696, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 17, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(102, 102, 102)
+                .addComponent(jLabel4)
+                .addContainerGap(216, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Programa B", jPanel1);
 
-        jLabel2.setText("IMAGEN");
+        lblIntervalosC.setText("Cantidad de Intervalos: ");
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Números"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+        txtCantidadNumerosC.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        txtCantidadNumerosC.setText("Cantidad de Números Aleatorios a generar");
+        txtCantidadNumerosC.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtCantidadNumerosCFocusGained(evt);
             }
         });
-        jScrollPane3.setViewportView(jTable3);
-        if (jTable3.getColumnModel().getColumnCount() > 0) {
-            jTable3.getColumnModel().getColumn(0).setResizable(false);
-        }
+        txtCantidadNumerosC.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCantidadNumerosCKeyTyped(evt);
+            }
+        });
+
+        cmbIntervalosC.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "10", "15", "20" }));
+
+        btnGenerarC.setText("Generar");
+        btnGenerarC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarCActionPerformed(evt);
+            }
+        });
+
+        jScrollPane3.setViewportView(listNumerosC);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnGenerarC)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel5Layout.createSequentialGroup()
+                            .addComponent(lblIntervalosC, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(cmbIntervalosC, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtCantidadNumerosC, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(graficoC, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(graficoC, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblIntervalosC)
+                            .addComponent(cmbIntervalosC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(txtCantidadNumerosC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnGenerarC)))
+                .addContainerGap(37, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 393, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 24, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Programa C", jPanel4);
@@ -362,7 +428,7 @@ public class GUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 14, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -531,6 +597,7 @@ public class GUI extends javax.swing.JFrame {
                 cmbMetodo.setEnabled(false);
                 chkOptima.setEnabled(false);
 
+                jTabbedPane1.setEnabled(true);
                 btnReiniciar.setEnabled(true);
                 btnSiguiente.setEnabled(true);
             }
@@ -596,21 +663,101 @@ public class GUI extends javax.swing.JFrame {
         chkOptima.setEnabled(true);
         chkOptima.setSelected(false);
         
-        
+        jTabbedPane1.setEnabled(false);
         btnReiniciar.setEnabled(false);
         btnSiguiente.setEnabled(false);
 
     }//GEN-LAST:event_btnReiniciarActionPerformed
 
-    private void cmbMetodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbMetodoActionPerformed
-        if (cmbMetodo.getItemCount() == 0){
+    private void txtCantidadNumerosCKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadNumerosCKeyTyped
+        char caracter = evt.getKeyChar();
+
+        if ((caracter < '0') || (caracter > '9')) {
+            evt.consume();
+            if (txtCantidadNumerosC.getText().compareTo("") == 0) {
+                validoCantC = false;
+            }
+        } else {
+            validoCantC = true;
+        }
+    }//GEN-LAST:event_txtCantidadNumerosCKeyTyped
+
+    private void txtCantidadNumerosCFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCantidadNumerosCFocusGained
+        if (!validoCantC) {
+           txtCantidadNumerosC.setText("");
+        }
+
+        txtCantidadNumerosC.setInputVerifier(new InputVerifier() {
+            public boolean verify(JComponent input) {
+                JTextField tf = (JTextField) input;
+                String cadena = tf.getText();
+                if (cadena.compareTo("") == 0) {
+                    txtCantidadNumerosC.setText("Cantidad de Números Aleatorios a generar");
+                }
+                return true;
+            }
+        });
+    }//GEN-LAST:event_txtCantidadNumerosCFocusGained
+
+    private void txtCantidadNumerosBFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtCantidadNumerosBFocusGained
+        if (!validoCantB) {
+            txtCantidadNumerosB.setText("");
+        }
+
+        txtCantidadNumerosB.setInputVerifier(new InputVerifier() {
+            public boolean verify(JComponent input) {
+                JTextField tf = (JTextField) input;
+                String cadena = tf.getText();
+                if (cadena.compareTo("") == 0) {
+                    txtCantidadNumerosB.setText("Cantidad de Números Aleatorios a generar");
+                }
+                return true;
+            }
+        });
+    }//GEN-LAST:event_txtCantidadNumerosBFocusGained
+
+    private void txtCantidadNumerosBKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadNumerosBKeyTyped
+        char caracter = evt.getKeyChar();
+
+        if ((caracter < '0') || (caracter > '9')) {
+            evt.consume();
+            if (txtCantidadNumerosB.getText().compareTo("") == 0) {
+                validoCantB = false;
+            }
+        } else {
+            validoCantB = true;
+        }
+    }//GEN-LAST:event_txtCantidadNumerosBKeyTyped
+
+    private void btnGenerarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarBActionPerformed
+        if (validoCantB){
+            DefaultListModel listaNumeros = new DefaultListModel();
             
+            for (int i = 0; i < Integer.parseInt(txtCantidadNumerosB.getText()); i++) {
+                int a = (int)(Math.random()*10000);
+                listaNumeros.addElement((float)a/10000);
+            }
             
-        }else if(cmbMetodo.getItemCount() == 1){
+            listNumerosB.setModel(listaNumeros);
+                
             
         }
-        
-    }//GEN-LAST:event_cmbMetodoActionPerformed
+    }//GEN-LAST:event_btnGenerarBActionPerformed
+
+    private void btnGenerarCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarCActionPerformed
+        if (validoCantC){
+            DefaultListModel listaNumeros = new DefaultListModel();
+            Object[][] array = congruencial.getNumeros(Integer.parseInt(txtCantidadNumerosC.getText()));
+            
+            for (int i = 0; i < array[1].length; i++) {
+                int a = (int)((double)array[1][i]*10000);
+                listaNumeros.addElement((float)a/10000);
+            }
+            
+            listNumerosC.setModel(listaNumeros);
+            
+        }
+    }//GEN-LAST:event_btnGenerarCActionPerformed
 
     private boolean validarCampos() {
         return (validoSemilla && validoM && validoA && validoC);
@@ -647,6 +794,11 @@ public class GUI extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void cargarListaB(){
+        
+    }
+    
 
     private Congruencial congruencial;
     
@@ -654,34 +806,47 @@ public class GUI extends javax.swing.JFrame {
     private boolean validoSemilla;
     private boolean validoA;
     private boolean validoC;
+    private boolean validoCantB;
+    private boolean validoCantC;
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerar;
+    private javax.swing.JButton btnGenerarB;
+    private javax.swing.JButton btnGenerarC;
     private javax.swing.JButton btnReiniciar;
     private javax.swing.JButton btnSiguiente;
     private javax.swing.JCheckBox chkOptima;
+    private javax.swing.JComboBox cmbIntervalosB;
+    private javax.swing.JComboBox cmbIntervalosC;
     private javax.swing.JComboBox<String> cmbMetodo;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel graficoB;
+    private javax.swing.JLabel graficoC;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JLabel lblA;
     private javax.swing.JLabel lblC;
+    private javax.swing.JLabel lblIntervalosB;
+    private javax.swing.JLabel lblIntervalosC;
     private javax.swing.JLabel lblM;
     private javax.swing.JLabel lblMetodo;
     private javax.swing.JLabel lblSemilla;
     private javax.swing.JList listNumeros;
+    private javax.swing.JList listNumerosB;
+    private javax.swing.JList listNumerosC;
     private javax.swing.JTextField txtA;
     private javax.swing.JTextField txtC;
+    private javax.swing.JTextField txtCantidadNumerosB;
+    private javax.swing.JTextField txtCantidadNumerosC;
     private javax.swing.JTextField txtM;
     private javax.swing.JTextField txtSemilla;
     // End of variables declaration//GEN-END:variables

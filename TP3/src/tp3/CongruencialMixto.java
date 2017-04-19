@@ -59,21 +59,7 @@ public class CongruencialMixto{
         a-1 is divisible by 4 if m is divisible by 4.
         */
     }
-    
-    //Retorna matriz con numeros en columna 0 y randoms en columna 1
-    public Object[][] getNumerosUniformes(int cantidad) {
-        Object[][] numeros = new Object[2][cantidad];
-
-        double xi = this.seed;
-
-        for (int i = 0; i < cantidad; i++) {
-            xi = (a * xi + c) % m;
-            numeros[0][i] = (long) xi;
-            numeros[1][i] = xi / (m - 1);
-        }
-        return numeros;
-    }
-    
+        
     public Object[] getNumerosUniformes(int cantidad, int desde, int hasta) {
         Object[] numeros = new Object[cantidad];
         
@@ -134,9 +120,7 @@ public class CongruencialMixto{
         }
         
         return numeros;
-    }
-    
-           
+    }      
 }
 
 

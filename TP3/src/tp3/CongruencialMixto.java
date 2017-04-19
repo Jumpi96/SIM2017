@@ -108,8 +108,35 @@ public class CongruencialMixto{
         return numeros;
     }
     
-    
+    public Object[] getNumerosNomales(int cantidad, float media, float varianza) {
+        Object[] numeros;
+        if (cantidad % 2 == 0){
+            numeros = new Object[cantidad];
+        }
+        else {
+            numeros = new Object[cantidad+1];
+        }
         
+        double xi = this.seed;
+        double rnd1;
+        double rnd2;
+        
+        //podria haberle metido un poquito mas de ganas pero ya fue
+        for (int i = 0; i < cantidad; i = i+2) {
+            xi = (a * xi + c) % m;
+            rnd1 = xi / (m - 1);
+            
+            xi = (a * xi + c) % m;
+            rnd2 = xi / (m - 1);
+            
+            numeros[i] = Math.sqrt((-2)*Math.log(rnd1)) * Math.cos(2*Math.PI*rnd2)*varianza + media;
+            numeros[i+1] = Math.sqrt((-2)*Math.log(rnd1)) * Math.sin(2*Math.PI*rnd2)*varianza + media;
+        }
+        
+        return numeros;
+    }
+    
+           
 }
 
 

@@ -139,9 +139,9 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextPane" name="jTextPane1">
+            <Component class="javax.swing.JTextPane" name="txtCantidad">
               <Events>
-                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextPane1KeyTyped"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtCantidadKeyTyped"/>
               </Events>
             </Component>
           </SubComponents>
@@ -392,6 +392,7 @@
               <SubComponents>
                 <Component class="javax.swing.JTextPane" name="txtFrecuenciaExp">
                   <Events>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtFrecuenciaExpFocusGained"/>
                     <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFrecuenciaExpKeyTyped"/>
                   </Events>
                 </Component>
@@ -406,6 +407,7 @@
               <SubComponents>
                 <Component class="javax.swing.JTextPane" name="txtMediaExp">
                   <Events>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtMediaExpFocusGained"/>
                     <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtMediaExpKeyTyped"/>
                   </Events>
                 </Component>
@@ -478,6 +480,7 @@
               <SubComponents>
                 <Component class="javax.swing.JTextPane" name="txtMediaPoi">
                   <Events>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtMediaPoiFocusGained"/>
                     <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtMediaPoiKeyTyped"/>
                   </Events>
                 </Component>
@@ -492,6 +495,7 @@
               <SubComponents>
                 <Component class="javax.swing.JTextPane" name="txtFrecuenciaPoi">
                   <Events>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="txtFrecuenciaPoiFocusGained"/>
                     <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFrecuenciaPoiKeyTyped"/>
                   </Events>
                 </Component>
@@ -505,6 +509,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Generar"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGenerarActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
 

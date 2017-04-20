@@ -1,7 +1,10 @@
 package tp3;
 
 import java.awt.CardLayout;
+import javax.swing.InputVerifier;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class GUI extends javax.swing.JFrame {
 
@@ -10,6 +13,7 @@ public class GUI extends javax.swing.JFrame {
 
         cl = (CardLayout) cardPanel.getLayout();
         cl.show(cardPanel, "cartaUniforme");
+        generador = new CongruencialMixto();
 
     }
 
@@ -23,7 +27,7 @@ public class GUI extends javax.swing.JFrame {
         cmbDistribucion = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        txtCantidad = new javax.swing.JTextPane();
         cardPanel = new javax.swing.JPanel();
         panelUniforme = new javax.swing.JPanel();
         lblIntervaloDesde = new javax.swing.JLabel();
@@ -74,12 +78,12 @@ public class GUI extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Cantidad de valores a generar:");
 
-        jTextPane1.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jTextPane1KeyTyped(evt);
+                txtCantidadKeyTyped(evt);
             }
         });
-        jScrollPane1.setViewportView(jTextPane1);
+        jScrollPane1.setViewportView(txtCantidad);
 
         javax.swing.GroupLayout panelGenerarLayout = new javax.swing.GroupLayout(panelGenerar);
         panelGenerar.setLayout(panelGenerarLayout);
@@ -222,6 +226,11 @@ public class GUI extends javax.swing.JFrame {
         lblMediaExp.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblMediaExp.setText("Ingrese la Media:");
 
+        txtFrecuenciaExp.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtFrecuenciaExpFocusGained(evt);
+            }
+        });
         txtFrecuenciaExp.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtFrecuenciaExpKeyTyped(evt);
@@ -229,6 +238,11 @@ public class GUI extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(txtFrecuenciaExp);
 
+        txtMediaExp.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtMediaExpFocusGained(evt);
+            }
+        });
         txtMediaExp.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtMediaExpKeyTyped(evt);
@@ -273,6 +287,11 @@ public class GUI extends javax.swing.JFrame {
         lblMediaPoi.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblMediaPoi.setText("Ingrese la Media:");
 
+        txtMediaPoi.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtMediaPoiFocusGained(evt);
+            }
+        });
         txtMediaPoi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtMediaPoiKeyTyped(evt);
@@ -280,6 +299,11 @@ public class GUI extends javax.swing.JFrame {
         });
         jScrollPane8.setViewportView(txtMediaPoi);
 
+        txtFrecuenciaPoi.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtFrecuenciaPoiFocusGained(evt);
+            }
+        });
         txtFrecuenciaPoi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtFrecuenciaPoiKeyTyped(evt);
@@ -319,6 +343,11 @@ public class GUI extends javax.swing.JFrame {
         cardPanel.add(panelPoisson, "cartaPoisson");
 
         btnGenerar.setText("Generar");
+        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarActionPerformed(evt);
+            }
+        });
 
         jScrollPane10.setViewportView(jList1);
 
@@ -381,7 +410,38 @@ public class GUI extends javax.swing.JFrame {
         } else if (cmbDistribucion.getSelectedItem().toString().compareTo("Poisson") == 0) {
             cl.show(cardPanel, "cartaPoisson");
         }
+        limpiarCampos();
     }//GEN-LAST:event_cmbDistribucionActionPerformed
+
+    private void limpiarCampos() {
+        txtFrecuenciaExp.setText("");
+        txtFrecuenciaNormal.setText("");
+        txtFrecuenciaPoi.setText("");
+        txtIntervaloDesde.setText("");
+        txtIntervaloHasta.setText("");
+        txtMediaExp.setText("");
+        txtMediaPoi.setText("");
+        txtVarianza.setText("");
+    }
+
+    private boolean verificar() {
+        boolean retorno = false;
+
+        if (txtCantidad.getText().compareTo("") != 0) {
+            if (cmbDistribucion.getSelectedItem().toString().compareTo("Exponencial Negativa") == 0) {
+                retorno = (txtFrecuenciaExp.getText().compareTo("") != 0 && txtMediaExp.getText().compareTo("") != 0);
+            } else if (cmbDistribucion.getSelectedItem().toString().compareTo("Normal") == 0) {
+                retorno = (txtVarianza.getText().compareTo("") != 0 && txtFrecuenciaNormal.getText().compareTo("") != 0);
+            } else if (cmbDistribucion.getSelectedItem().toString().compareTo("Uniforme") == 0) {
+                retorno = (txtIntervaloDesde.getText().compareTo("") != 0 && txtIntervaloHasta.getText().compareTo("") != 0);
+            } else if (cmbDistribucion.getSelectedItem().toString().compareTo("Poisson") == 0) {
+                retorno = (txtFrecuenciaPoi.getText().compareTo("") != 0 && txtMediaPoi.getText().compareTo("") != 0);
+            }
+        }
+
+        return retorno;
+    }
+
 
     private void txtFrecuenciaPoiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFrecuenciaPoiKeyTyped
         char caracter = evt.getKeyChar();
@@ -445,15 +505,94 @@ public class GUI extends javax.swing.JFrame {
         if ((caracter < '0' || caracter > '9') && caracter != '.') {
             evt.consume();
         }
+
     }//GEN-LAST:event_txtMediaExpKeyTyped
 
-    private void jTextPane1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPane1KeyTyped
+    private void txtCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantidadKeyTyped
         char caracter = evt.getKeyChar();
 
         if (caracter < '0' || caracter > '9') {
             evt.consume();
-        } 
-    }//GEN-LAST:event_jTextPane1KeyTyped
+        }
+    }//GEN-LAST:event_txtCantidadKeyTyped
+
+    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
+        if (verificar()) {
+            Object array[] = generador.getNumerosExponenciales(Integer.parseInt(txtCantidad.getText()), Float.parseFloat(txtFrecuenciaExp.getText()));
+
+            for (int i = 0; i < array.length; i++) {
+                System.out.println("" + array[i]);
+            }
+        }
+    }//GEN-LAST:event_btnGenerarActionPerformed
+
+    private void txtFrecuenciaExpFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFrecuenciaExpFocusGained
+        txtFrecuenciaExp.setInputVerifier(new InputVerifier() {
+            public boolean verify(JComponent input) {
+                try {
+                    if (txtFrecuenciaExp.getText().compareTo("") != 0) {
+                        txtMediaExp.setText("" + (1 / Float.parseFloat(txtFrecuenciaExp.getText())));
+                    } else if (txtMediaExp.getText().compareTo("") != 0) {
+                        txtFrecuenciaExp.setText("" + (1 / Float.parseFloat(txtMediaExp.getText())));
+                    }
+                } catch (Exception e) {
+                    System.out.println("" + e.getMessage());
+                }
+                return true;
+            }
+        });
+    }//GEN-LAST:event_txtFrecuenciaExpFocusGained
+
+    private void txtMediaExpFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMediaExpFocusGained
+        txtMediaExp.setInputVerifier(new InputVerifier() {
+            public boolean verify(JComponent input) {
+                try {
+                    if (txtMediaExp.getText().compareTo("") != 0) {
+                        txtFrecuenciaExp.setText("" + (1 / Float.parseFloat(txtMediaExp.getText())));
+                    } else if (txtFrecuenciaExp.getText().compareTo("") != 0) {
+                        txtMediaExp.setText("" + (1 / Float.parseFloat(txtFrecuenciaExp.getText())));
+                    }
+                } catch (Exception e) {
+                    System.out.println("" + e.getMessage());
+                }
+                return true;
+            }
+        });
+    }//GEN-LAST:event_txtMediaExpFocusGained
+
+    private void txtFrecuenciaPoiFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFrecuenciaPoiFocusGained
+        txtFrecuenciaPoi.setInputVerifier(new InputVerifier() {
+            public boolean verify(JComponent input) {
+                try {
+                    if (txtFrecuenciaPoi.getText().compareTo("") != 0) {
+                        txtMediaPoi.setText("" + (1 / Float.parseFloat(txtFrecuenciaPoi.getText())));
+                    } else if (txtMediaPoi.getText().compareTo("") != 0) {
+                        txtFrecuenciaPoi.setText("" + (1 / Float.parseFloat(txtMediaPoi.getText())));
+                    }
+                } catch (Exception e) {
+                    System.out.println("" + e.getMessage());
+                }
+                return true;
+            }
+        });
+    }//GEN-LAST:event_txtFrecuenciaPoiFocusGained
+
+    private void txtMediaPoiFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtMediaPoiFocusGained
+        txtMediaPoi.setInputVerifier(new InputVerifier() {
+            public boolean verify(JComponent input) {
+                try {
+                    if (txtMediaPoi.getText().compareTo("") != 0) {
+                        txtFrecuenciaPoi.setText("" + (1 / Float.parseFloat(txtMediaPoi.getText())));
+                    } else if (txtFrecuenciaPoi.getText().compareTo("") != 0) {
+                        txtMediaPoi.setText("" + (1 / Float.parseFloat(txtFrecuenciaPoi.getText())));
+                    }
+                } catch (Exception e) {
+                    System.out.println("" + e.getMessage());
+                }
+                return true;
+            }
+        });
+    }//GEN-LAST:event_txtMediaPoiFocusGained
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -488,6 +627,7 @@ public class GUI extends javax.swing.JFrame {
     }
 
     CardLayout cl;
+    CongruencialMixto generador;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerar;
     private java.awt.Canvas canvas1;
@@ -506,7 +646,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
-    private javax.swing.JTextPane jTextPane1;
     private javax.swing.JLabel lblDistribucion;
     private javax.swing.JLabel lblFrecuenciaExp;
     private javax.swing.JLabel lblFrecuenciaNormal;
@@ -521,6 +660,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel panelNormal;
     private javax.swing.JPanel panelPoisson;
     private javax.swing.JPanel panelUniforme;
+    private javax.swing.JTextPane txtCantidad;
     private javax.swing.JTextPane txtFrecuenciaExp;
     private javax.swing.JTextPane txtFrecuenciaNormal;
     private javax.swing.JTextPane txtFrecuenciaPoi;

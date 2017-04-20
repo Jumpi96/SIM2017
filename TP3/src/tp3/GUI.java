@@ -7,9 +7,10 @@ public class GUI extends javax.swing.JFrame {
 
     public GUI() {
         initComponents();
-                
+
         cl = (CardLayout) cardPanel.getLayout();
-        cl.show(cardPanel,"cartaUniforme");
+        cl.show(cardPanel, "cartaUniforme");
+
     }
 
     @SuppressWarnings("unchecked")
@@ -73,6 +74,11 @@ public class GUI extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Cantidad de valores a generar:");
 
+        jTextPane1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTextPane1KeyTyped(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextPane1);
 
         javax.swing.GroupLayout panelGenerarLayout = new javax.swing.GroupLayout(panelGenerar);
@@ -112,8 +118,18 @@ public class GUI extends javax.swing.JFrame {
         lblIntervaloHasta.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblIntervaloHasta.setText("Ingrese el fin del intervalo:");
 
+        txtIntervaloHasta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIntervaloHastaKeyTyped(evt);
+            }
+        });
         jScrollPane3.setViewportView(txtIntervaloHasta);
 
+        txtIntervaloDesde.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIntervaloDesdeKeyTyped(evt);
+            }
+        });
         jScrollPane2.setViewportView(txtIntervaloDesde);
 
         javax.swing.GroupLayout panelUniformeLayout = new javax.swing.GroupLayout(panelUniforme);
@@ -121,14 +137,14 @@ public class GUI extends javax.swing.JFrame {
         panelUniformeLayout.setHorizontalGroup(
             panelUniformeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelUniformeLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(50, Short.MAX_VALUE)
                 .addGroup(panelUniformeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblIntervaloDesde, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblIntervaloHasta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblIntervaloHasta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblIntervaloDesde, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelUniformeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
                 .addContainerGap())
         );
         panelUniformeLayout.setVerticalGroup(
@@ -150,8 +166,18 @@ public class GUI extends javax.swing.JFrame {
         lblVarianza.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblVarianza.setText("Ingrese la varianza:");
 
+        txtVarianza.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtVarianzaKeyTyped(evt);
+            }
+        });
         jScrollPane6.setViewportView(txtVarianza);
 
+        txtFrecuenciaNormal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFrecuenciaNormalKeyTyped(evt);
+            }
+        });
         jScrollPane7.setViewportView(txtFrecuenciaNormal);
 
         lblFrecuenciaNormal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -181,10 +207,10 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(panelNormalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblVarianza, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(19, 19, 19)
                 .addGroup(panelNormalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblFrecuenciaNormal)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFrecuenciaNormal))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -196,8 +222,18 @@ public class GUI extends javax.swing.JFrame {
         lblMediaExp.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblMediaExp.setText("Ingrese la Media:");
 
+        txtFrecuenciaExp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFrecuenciaExpKeyTyped(evt);
+            }
+        });
         jScrollPane4.setViewportView(txtFrecuenciaExp);
 
+        txtMediaExp.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMediaExpKeyTyped(evt);
+            }
+        });
         jScrollPane5.setViewportView(txtMediaExp);
 
         javax.swing.GroupLayout panelExponencialLayout = new javax.swing.GroupLayout(panelExponencial);
@@ -237,8 +273,18 @@ public class GUI extends javax.swing.JFrame {
         lblMediaPoi.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblMediaPoi.setText("Ingrese la Media:");
 
+        txtMediaPoi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMediaPoiKeyTyped(evt);
+            }
+        });
         jScrollPane8.setViewportView(txtMediaPoi);
 
+        txtFrecuenciaPoi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtFrecuenciaPoiKeyTyped(evt);
+            }
+        });
         jScrollPane9.setViewportView(txtFrecuenciaPoi);
 
         javax.swing.GroupLayout panelPoissonLayout = new javax.swing.GroupLayout(panelPoisson);
@@ -261,13 +307,13 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(panelPoissonLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelPoissonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblFrecuenciaPoi)
-                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFrecuenciaPoi))
                 .addGap(18, 18, 18)
                 .addGroup(panelPoissonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(lblMediaPoi)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMediaPoi))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
         cardPanel.add(panelPoisson, "cartaPoisson");
@@ -326,18 +372,89 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmbDistribucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDistribucionActionPerformed
-        if(cmbDistribucion.getSelectedItem().toString().compareTo("Exponencial Negativa") == 0){
-            cl.show(cardPanel,"cartaExponencial");
-        }else if(cmbDistribucion.getSelectedItem().toString().compareTo("Normal") == 0){
-            cl.show(cardPanel,"cartaNormal");
-        }else if(cmbDistribucion.getSelectedItem().toString().compareTo("Uniforme") == 0){
-            cl.show(cardPanel,"cartaUniforme");
-        }else if(cmbDistribucion.getSelectedItem().toString().compareTo("Poisson") == 0){
-            cl.show(cardPanel,"cartaPoisson");
+        if (cmbDistribucion.getSelectedItem().toString().compareTo("Exponencial Negativa") == 0) {
+            cl.show(cardPanel, "cartaExponencial");
+        } else if (cmbDistribucion.getSelectedItem().toString().compareTo("Normal") == 0) {
+            cl.show(cardPanel, "cartaNormal");
+        } else if (cmbDistribucion.getSelectedItem().toString().compareTo("Uniforme") == 0) {
+            cl.show(cardPanel, "cartaUniforme");
+        } else if (cmbDistribucion.getSelectedItem().toString().compareTo("Poisson") == 0) {
+            cl.show(cardPanel, "cartaPoisson");
         }
     }//GEN-LAST:event_cmbDistribucionActionPerformed
 
-    
+    private void txtFrecuenciaPoiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFrecuenciaPoiKeyTyped
+        char caracter = evt.getKeyChar();
+
+        if ((caracter < '0' || caracter > '9') && caracter != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtFrecuenciaPoiKeyTyped
+
+    private void txtMediaPoiKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMediaPoiKeyTyped
+        char caracter = evt.getKeyChar();
+
+        if ((caracter < '0' || caracter > '9') && caracter != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtMediaPoiKeyTyped
+
+    private void txtIntervaloDesdeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIntervaloDesdeKeyTyped
+        char caracter = evt.getKeyChar();
+
+        if ((caracter < '0' || caracter > '9') && caracter != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtIntervaloDesdeKeyTyped
+
+    private void txtIntervaloHastaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIntervaloHastaKeyTyped
+        char caracter = evt.getKeyChar();
+
+        if ((caracter < '0' || caracter > '9') && caracter != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtIntervaloHastaKeyTyped
+
+    private void txtVarianzaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtVarianzaKeyTyped
+        char caracter = evt.getKeyChar();
+
+        if ((caracter < '0' || caracter > '9') && caracter != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtVarianzaKeyTyped
+
+    private void txtFrecuenciaNormalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFrecuenciaNormalKeyTyped
+        char caracter = evt.getKeyChar();
+
+        if ((caracter < '0' || caracter > '9') && caracter != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtFrecuenciaNormalKeyTyped
+
+    private void txtFrecuenciaExpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFrecuenciaExpKeyTyped
+        char caracter = evt.getKeyChar();
+
+        if ((caracter < '0' || caracter > '9') && caracter != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtFrecuenciaExpKeyTyped
+
+    private void txtMediaExpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMediaExpKeyTyped
+        char caracter = evt.getKeyChar();
+
+        if ((caracter < '0' || caracter > '9') && caracter != '.') {
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtMediaExpKeyTyped
+
+    private void jTextPane1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextPane1KeyTyped
+        char caracter = evt.getKeyChar();
+
+        if (caracter < '0' || caracter > '9') {
+            evt.consume();
+        } 
+    }//GEN-LAST:event_jTextPane1KeyTyped
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -370,7 +487,6 @@ public class GUI extends javax.swing.JFrame {
         });
     }
 
-    
     CardLayout cl;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerar;

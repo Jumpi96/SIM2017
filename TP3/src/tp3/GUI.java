@@ -573,7 +573,7 @@ public class GUI extends javax.swing.JFrame {
                     max = Integer.parseInt(txtIntervaloHasta.getText());
                     
                 } else if (distribucionSeleccionada().compareTo("Poisson") == 0) {
-                    array = generador.getNumerosExponenciales(Integer.parseInt(txtCantidad.getText()), Float.parseFloat(txtFrecuenciaExp.getText()));
+                    array = generador.getNumerosPoisson(Integer.parseInt(txtCantidad.getText()), Float.parseFloat(txtFrecuenciaPoi.getText()));
                     
                     calcularMinimo = true;
                     calcularMaximo = true;

@@ -134,12 +134,31 @@ public class CongruencialMixto{
             truncar = ((Double)((double)numeros[i+1]*10000)).intValue();
             numeros[i+1] = (double)truncar / 10000;
             
-            
-            
         }
         
         return numeros;
     }      
+    
+    
+    public Object[] getNumerosPoisson(int cantidad, float lambda) {
+        Object[] numeros = new Object[cantidad];
+        
+        for (int i = 0; i < cantidad; i++) {
+            double p = 1;
+            int numero =  -1;
+            double exp = Math.pow(Math.E, ((-1)*lambda));
+            
+            do{
+                double u = Math.random();
+                p = p * u;
+                numero = numero + 1;
+            }while (p >= exp);
+            
+            numeros[i] = (double)numero;
+        }
+        
+        return numeros;
+    }
 }
 
 

@@ -76,9 +76,10 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="1" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
+                      <Component id="lblCantIntervalos" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="1" min="-2" pref="211" max="-2" attributes="0"/>
                       <Component id="lblDistribucion" alignment="1" min="-2" pref="228" max="-2" attributes="0"/>
                   </Group>
@@ -86,6 +87,7 @@
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="cmbDistribucion" pref="169" max="32767" attributes="0"/>
                       <Component id="jScrollPane1" max="32767" attributes="0"/>
+                      <Component id="cmbCantIntervalos" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -104,7 +106,12 @@
                       <Component id="jLabel1" min="-2" pref="31" max="-2" attributes="0"/>
                       <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="17" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="lblCantIntervalos" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbCantIntervalos" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -151,6 +158,23 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JLabel" name="lblCantIntervalos">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cantidad de intervalos a generar:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbCantIntervalos">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="5"/>
+                <StringItem index="1" value="10"/>
+                <StringItem index="2" value="15"/>
+                <StringItem index="3" value="20"/>
+              </StringArray>
+            </Property>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="cardPanel">
@@ -256,7 +280,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblFrecuenciaNormal" max="32767" attributes="0"/>
+                          <Component id="lblMediaNormal" max="32767" attributes="0"/>
                           <Group type="102" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="lblVarianza" min="-2" pref="152" max="-2" attributes="0"/>
@@ -282,7 +306,7 @@
                       <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jScrollPane7" min="-2" max="-2" attributes="0"/>
-                          <Component id="lblFrecuenciaNormal" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblMediaNormal" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -317,17 +341,17 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JTextPane" name="txtFrecuenciaNormal">
+                <Component class="javax.swing.JTextPane" name="txtMediaNormal">
                   <Events>
-                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtFrecuenciaNormalKeyTyped"/>
+                    <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtMediaNormalKeyTyped"/>
                   </Events>
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="lblFrecuenciaNormal">
+            <Component class="javax.swing.JLabel" name="lblMediaNormal">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="4"/>
-                <Property name="text" type="java.lang.String" value="Ingrese la frecuencia:"/>
+                <Property name="text" type="java.lang.String" value="Ingrese la media:"/>
               </Properties>
             </Component>
           </SubComponents>
@@ -431,7 +455,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace pref="98" max="32767" attributes="0"/>
+                      <EmptySpace pref="100" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="lblFrecuenciaPoi" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
                           <Component id="lblMediaPoi" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
@@ -544,7 +568,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JList" name="jList1">
+            <Component class="javax.swing.JList" name="listNumeros">
               <Properties>
                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                   <StringArray count="0"/>

@@ -1,6 +1,7 @@
 package tp3;
 
 import java.awt.CardLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.InputVerifier;
 import javax.swing.JComponent;
 import javax.swing.JPanel;
@@ -28,6 +29,8 @@ public class GUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtCantidad = new javax.swing.JTextPane();
+        lblCantIntervalos = new javax.swing.JLabel();
+        cmbCantIntervalos = new javax.swing.JComboBox();
         cardPanel = new javax.swing.JPanel();
         panelUniforme = new javax.swing.JPanel();
         lblIntervaloDesde = new javax.swing.JLabel();
@@ -41,8 +44,8 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane6 = new javax.swing.JScrollPane();
         txtVarianza = new javax.swing.JTextPane();
         jScrollPane7 = new javax.swing.JScrollPane();
-        txtFrecuenciaNormal = new javax.swing.JTextPane();
-        lblFrecuenciaNormal = new javax.swing.JLabel();
+        txtMediaNormal = new javax.swing.JTextPane();
+        lblMediaNormal = new javax.swing.JLabel();
         panelExponencial = new javax.swing.JPanel();
         lblFrecuenciaExp = new javax.swing.JLabel();
         lblMediaExp = new javax.swing.JLabel();
@@ -60,7 +63,7 @@ public class GUI extends javax.swing.JFrame {
         btnGenerar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane10 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        listNumeros = new javax.swing.JList();
         lblIntervaloHasta1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -86,19 +89,25 @@ public class GUI extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(txtCantidad);
 
+        lblCantIntervalos.setText("Cantidad de intervalos a generar:");
+
+        cmbCantIntervalos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "5", "10", "15", "20" }));
+
         javax.swing.GroupLayout panelGenerarLayout = new javax.swing.GroupLayout(panelGenerar);
         panelGenerar.setLayout(panelGenerarLayout);
         panelGenerarLayout.setHorizontalGroup(
             panelGenerarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelGenerarLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelGenerarLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(panelGenerarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDistribucion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelGenerarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblCantIntervalos)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDistribucion, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(panelGenerarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(cmbDistribucion, 0, 169, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1)
+                    .addComponent(cmbCantIntervalos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelGenerarLayout.setVerticalGroup(
@@ -112,7 +121,11 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(panelGenerarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                .addGroup(panelGenerarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCantIntervalos)
+                    .addComponent(cmbCantIntervalos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         cardPanel.setLayout(new java.awt.CardLayout());
@@ -178,15 +191,15 @@ public class GUI extends javax.swing.JFrame {
         });
         jScrollPane6.setViewportView(txtVarianza);
 
-        txtFrecuenciaNormal.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtMediaNormal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtFrecuenciaNormalKeyTyped(evt);
+                txtMediaNormalKeyTyped(evt);
             }
         });
-        jScrollPane7.setViewportView(txtFrecuenciaNormal);
+        jScrollPane7.setViewportView(txtMediaNormal);
 
-        lblFrecuenciaNormal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblFrecuenciaNormal.setText("Ingrese la frecuencia:");
+        lblMediaNormal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblMediaNormal.setText("Ingrese la media:");
 
         javax.swing.GroupLayout panelNormalLayout = new javax.swing.GroupLayout(panelNormal);
         panelNormal.setLayout(panelNormalLayout);
@@ -195,7 +208,7 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(panelNormalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelNormalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblFrecuenciaNormal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblMediaNormal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelNormalLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblVarianza, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -215,7 +228,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(19, 19, 19)
                 .addGroup(panelNormalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFrecuenciaNormal))
+                    .addComponent(lblMediaNormal))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -317,7 +330,7 @@ public class GUI extends javax.swing.JFrame {
         panelPoissonLayout.setHorizontalGroup(
             panelPoissonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPoissonLayout.createSequentialGroup()
-                .addContainerGap(98, Short.MAX_VALUE)
+                .addContainerGap(100, Short.MAX_VALUE)
                 .addGroup(panelPoissonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lblFrecuenciaPoi, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblMediaPoi, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -350,7 +363,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane10.setViewportView(jList1);
+        jScrollPane10.setViewportView(listNumeros);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -424,7 +437,7 @@ public class GUI extends javax.swing.JFrame {
 
     private void limpiarCampos() {
         txtFrecuenciaExp.setText("");
-        txtFrecuenciaNormal.setText("");
+        txtMediaNormal.setText("");
         txtFrecuenciaPoi.setText("");
         txtIntervaloDesde.setText("");
         txtIntervaloHasta.setText("");
@@ -437,18 +450,22 @@ public class GUI extends javax.swing.JFrame {
         boolean retorno = false;
 
         if (txtCantidad.getText().compareTo("") != 0) {
-            if (cmbDistribucion.getSelectedItem().toString().compareTo("Exponencial Negativa") == 0) {
+            if (distribucionSeleccionada().compareTo("Exponencial Negativa") == 0) {
                 retorno = (txtFrecuenciaExp.getText().compareTo("") != 0 && txtMediaExp.getText().compareTo("") != 0);
-            } else if (cmbDistribucion.getSelectedItem().toString().compareTo("Normal") == 0) {
-                retorno = (txtVarianza.getText().compareTo("") != 0 && txtFrecuenciaNormal.getText().compareTo("") != 0);
-            } else if (cmbDistribucion.getSelectedItem().toString().compareTo("Uniforme") == 0) {
+            } else if (distribucionSeleccionada().compareTo("Normal") == 0) {
+                retorno = (txtVarianza.getText().compareTo("") != 0 && txtMediaNormal.getText().compareTo("") != 0);
+            } else if (distribucionSeleccionada().compareTo("Uniforme") == 0) {
                 retorno = (txtIntervaloDesde.getText().compareTo("") != 0 && txtIntervaloHasta.getText().compareTo("") != 0);
-            } else if (cmbDistribucion.getSelectedItem().toString().compareTo("Poisson") == 0) {
+            } else if (distribucionSeleccionada().compareTo("Poisson") == 0) {
                 retorno = (txtFrecuenciaPoi.getText().compareTo("") != 0 && txtMediaPoi.getText().compareTo("") != 0);
             }
         }
 
         return retorno;
+    }
+
+    private String distribucionSeleccionada() {
+        return cmbDistribucion.getSelectedItem().toString();
     }
 
 
@@ -492,13 +509,13 @@ public class GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_txtVarianzaKeyTyped
 
-    private void txtFrecuenciaNormalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFrecuenciaNormalKeyTyped
+    private void txtMediaNormalKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMediaNormalKeyTyped
         char caracter = evt.getKeyChar();
 
         if ((caracter < '0' || caracter > '9') && caracter != '.') {
             evt.consume();
         }
-    }//GEN-LAST:event_txtFrecuenciaNormalKeyTyped
+    }//GEN-LAST:event_txtMediaNormalKeyTyped
 
     private void txtFrecuenciaExpKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFrecuenciaExpKeyTyped
         char caracter = evt.getKeyChar();
@@ -526,13 +543,117 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCantidadKeyTyped
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-        if (verificar()) {
-            Object array[] = generador.getNumerosExponenciales(Integer.parseInt(txtCantidad.getText()), Float.parseFloat(txtFrecuenciaExp.getText()));
+       
+            if (verificar()) {
+                Object array[] = new Object[0];
+                boolean calcularMaximo = false;
+                boolean calcularMinimo = false;
+                float max = 0;
+                float min = 0;
+                
+                if (distribucionSeleccionada().compareTo("Exponencial Negativa") == 0) {
+                    array = generador.getNumerosExponenciales(Integer.parseInt(txtCantidad.getText()), Float.parseFloat(txtFrecuenciaExp.getText()));
+                    //calcularMinimo = false;
+                    calcularMaximo = true;
+                    
+                    min = 0;
+                    
+                } else if (distribucionSeleccionada().compareTo("Normal") == 0) {
+                    array = generador.getNumerosNomales(Integer.parseInt(txtCantidad.getText()), Float.parseFloat(txtMediaNormal.getText()), Float.parseFloat(txtVarianza.getText()));
+                    calcularMinimo = true;
+                    calcularMaximo = true;
+                    
+                } else if (distribucionSeleccionada().compareTo("Uniforme") == 0) {
+                    array = generador.getNumerosUniformes(Integer.parseInt(txtCantidad.getText()), Integer.parseInt(txtIntervaloDesde.getText()), Integer.parseInt(txtIntervaloHasta.getText()));
+                    
+                    //calcularMinimo = false;
+                    //calcularMaximo = false;
+                    
+                    min = Integer.parseInt(txtIntervaloDesde.getText());
+                    max = Integer.parseInt(txtIntervaloHasta.getText());
+                    
+                } else if (distribucionSeleccionada().compareTo("Poisson") == 0) {
+                    array = generador.getNumerosExponenciales(Integer.parseInt(txtCantidad.getText()), Float.parseFloat(txtFrecuenciaExp.getText()));
+                    
+                    calcularMinimo = true;
+                    calcularMaximo = true;
+                }
 
-            for (int i = 0; i < array.length; i++) {
-                System.out.println("" + array[i]);
+                DefaultListModel listaNumeros = new DefaultListModel();
+                
+                
+                
+                if(calcularMaximo) max = ((Double) array[0]).floatValue();
+                if(calcularMinimo) min = ((Double) array[0]).floatValue();
+                
+                
+                for (int i = 0; i < array.length; i++) {
+                    listaNumeros.addElement(array[i]);
+                    
+                    if(calcularMinimo && ((Double) array[i]).floatValue() < min){
+                        min = ((Double) array[i]).floatValue();
+                    }
+                    if(calcularMaximo && ((Double) array[i]).floatValue() > max){
+                        max = ((Double) array[i]).floatValue();
+                    }
+                }
+                
+                
+                listNumeros.setModel(listaNumeros);
+                System.out.println("MAX "+ max);
+                float largoIntervalo = max - min;
+                int cantidadIntervalos = Integer.parseInt(cmbCantIntervalos.getSelectedItem().toString());
+                String etiquetas[] = new String[cantidadIntervalos + 1];
+                float intervalos[] = new float[cantidadIntervalos + 1];
+                int valores[] = new int[cantidadIntervalos + 1];
+
+                for (int i = 0; i <= cantidadIntervalos; i++) {
+                    valores[i] = 0;
+                }
+                
+                for (int i = 0; i <= cantidadIntervalos; i++) {
+                    etiquetas[i] = "" + ((float) (((largoIntervalo / cantidadIntervalos) * (i)) + min))+ " - " + ((float) (((largoIntervalo / cantidadIntervalos) * (i+1)) + min));
+                }
+
+                for (int i = 0; i <= cantidadIntervalos; i++) {
+                    intervalos[i] = ((float) (((largoIntervalo / cantidadIntervalos) * (i)) + min));
+                }
+
+                
+                 for (int i = 0; i < array.length; i++) {
+                     for (int j = 0; j < intervalos.length; j++) {
+                        if ((j+1) == intervalos.length){
+                           
+                        }else if ((double) array[i] >= (double)intervalos[j] && (double) array[i] < (double)intervalos[j + 1]) {
+                            valores[j]++;
+                        }
+                    }
+                }
+                 
+                  for (int valor : valores) {
+                     System.out.println("valor: " + valor);
+                }
+                 
+                 
+                 for (float intervalo : intervalos) {
+                     System.out.println("intervalo :" + intervalo);
+                }
+                 
+                 for (String etiqueta: etiquetas){
+                     System.out.println(etiqueta);
+                }
+
+                
+              GraficoBarra graficoBarra = new GraficoBarra(etiquetas, valores);
+
+                
+                try {
+                    graficoBarra.graficar();
+                } catch (Exception exc) {
+                    System.out.println("mal");
+                }
             }
-        }
+        
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     private void txtFrecuenciaExpFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtFrecuenciaExpFocusGained
@@ -641,9 +762,9 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton btnGenerar;
     private java.awt.Canvas canvas1;
     private javax.swing.JPanel cardPanel;
+    private javax.swing.JComboBox cmbCantIntervalos;
     private javax.swing.JComboBox cmbDistribucion;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JList jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
@@ -655,16 +776,18 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JLabel lblCantIntervalos;
     private javax.swing.JLabel lblDistribucion;
     private javax.swing.JLabel lblFrecuenciaExp;
-    private javax.swing.JLabel lblFrecuenciaNormal;
     private javax.swing.JLabel lblFrecuenciaPoi;
     private javax.swing.JLabel lblIntervaloDesde;
     private javax.swing.JLabel lblIntervaloHasta;
     private javax.swing.JLabel lblIntervaloHasta1;
     private javax.swing.JLabel lblMediaExp;
+    private javax.swing.JLabel lblMediaNormal;
     private javax.swing.JLabel lblMediaPoi;
     private javax.swing.JLabel lblVarianza;
+    private javax.swing.JList listNumeros;
     private javax.swing.JPanel panelExponencial;
     private javax.swing.JPanel panelGenerar;
     private javax.swing.JPanel panelNormal;
@@ -672,11 +795,11 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JPanel panelUniforme;
     private javax.swing.JTextPane txtCantidad;
     private javax.swing.JTextPane txtFrecuenciaExp;
-    private javax.swing.JTextPane txtFrecuenciaNormal;
     private javax.swing.JTextPane txtFrecuenciaPoi;
     private javax.swing.JTextPane txtIntervaloDesde;
     private javax.swing.JTextPane txtIntervaloHasta;
     private javax.swing.JTextPane txtMediaExp;
+    private javax.swing.JTextPane txtMediaNormal;
     private javax.swing.JTextPane txtMediaPoi;
     private javax.swing.JTextPane txtVarianza;
     // End of variables declaration//GEN-END:variables

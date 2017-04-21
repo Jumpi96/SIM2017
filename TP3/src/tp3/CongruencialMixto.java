@@ -65,12 +65,16 @@ public class CongruencialMixto{
         
         double xi = this.seed;
         double rnd;
+        int truncar;
         
         for (int i = 0; i < cantidad; i++) {
             xi = (a * xi + c) % m;
             rnd = xi / (m - 1);
             
             numeros[i] = desde + rnd * (hasta - desde);
+            truncar = ((Double)((double)numeros[i]*10000)).intValue();
+            numeros[i] = (double)truncar / 10000;
+            
         }
         
         return numeros;
@@ -83,12 +87,15 @@ public class CongruencialMixto{
         double rnd;
         
         double u = (1)/lambda;
+        int truncar;
         
         for (int i = 0; i < cantidad; i++) {
             xi = (a * xi + c) % m;
             rnd = xi / (m - 1);
             
             numeros[i] = (-1) * u * Math.log(1-rnd);
+            truncar = ((Double)((double)numeros[i]*10000)).intValue();
+            numeros[i] = (double)truncar / 10000;
         }
         
         return numeros;
@@ -106,6 +113,9 @@ public class CongruencialMixto{
         double xi = this.seed;
         double rnd1;
         double rnd2;
+        int truncar;
+        
+        
         
         //podria haberle metido un poquito mas de ganas pero ya fue
         for (int i = 0; i < cantidad; i = i+2) {
@@ -116,7 +126,16 @@ public class CongruencialMixto{
             rnd2 = xi / (m - 1);
             
             numeros[i] = Math.sqrt((-2)*Math.log(rnd1)) * Math.cos(2*Math.PI*rnd2)*varianza + media;
+            
+            truncar = ((Double)((double)numeros[i]*10000)).intValue();
+            numeros[i] = (double)truncar / 10000;
+            
             numeros[i+1] = Math.sqrt((-2)*Math.log(rnd1)) * Math.sin(2*Math.PI*rnd2)*varianza + media;
+            truncar = ((Double)((double)numeros[i+1]*10000)).intValue();
+            numeros[i+1] = (double)truncar / 10000;
+            
+            
+            
         }
         
         return numeros;

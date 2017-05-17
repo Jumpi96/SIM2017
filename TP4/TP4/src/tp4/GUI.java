@@ -5,6 +5,9 @@
  */
 package tp4;
 
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author juampilorenzo
@@ -14,8 +17,11 @@ public class GUI extends javax.swing.JFrame {
     /**
      * Creates new form Interfaz
      */
+    private Simulacion s;
+    
     public GUI() {
         initComponents();
+        cargarCombo();
     }
 
     /**
@@ -40,21 +46,20 @@ public class GUI extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         ckbMostrar = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         btnSimular = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        lblPromVendidas = new javax.swing.JLabel();
+        lblPromTiradas = new javax.swing.JLabel();
+        lblPromDiferencia = new javax.swing.JLabel();
+        lblPromUtilidad = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("TP4 - Simulación ");
+        setResizable(false);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Tortas vendidas", "Tortas tiradas", "Utilidad", "Diferencia"
@@ -63,16 +68,27 @@ public class GUI extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         jLabel1.setText("Simular");
-
-        txtSemanas.setText("jTextField1");
 
         cmbDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -84,7 +100,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel4.setText("Promedio diario de tortas vendidas:");
 
         jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel5.setText("Promedio semanal diario de tortas tiradas:");
+        jLabel5.setText("Promedio diario de tortas tiradas:");
 
         jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel6.setText("Promedio de utilidad por día:");
@@ -94,12 +110,14 @@ public class GUI extends javax.swing.JFrame {
 
         ckbMostrar.setSelected(true);
         ckbMostrar.setText("Mostrar cada semana");
+        ckbMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ckbMostrarActionPerformed(evt);
+            }
+        });
 
         jLabel8.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
         jLabel8.setText("Todas las columnas de la tabla representan promedios diarios.");
-
-        jLabel9.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
-        jLabel9.setText("La re");
 
         btnSimular.setText("Simular");
         btnSimular.addActionListener(new java.awt.event.ActionListener() {
@@ -108,13 +126,8 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setText("jLabel10");
-
-        jLabel11.setText("jLabel10");
-
-        jLabel12.setText("jLabel10");
-
-        jLabel13.setText("jLabel10");
+        jLabel9.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
+        jLabel9.setText("La diferencia representa la utilidad actual frente a la utilidad pagando el permiso.");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -131,13 +144,14 @@ public class GUI extends javax.swing.JFrame {
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtSemanas)
+                                    .addComponent(cmbDia, 0, 103, Short.MAX_VALUE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(cmbDia, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(113, 113, 113)
                                         .addComponent(btnSimular))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtSemanas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(54, 54, 54)
@@ -145,22 +159,22 @@ public class GUI extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel10))
+                                .addComponent(lblPromVendidas))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel11))
+                                .addComponent(lblPromTiradas))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel13))
+                                .addComponent(lblPromUtilidad))
                             .addComponent(jLabel8)
-                            .addComponent(jLabel9)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel12)))
-                        .addGap(0, 54, Short.MAX_VALUE)))
+                                .addComponent(lblPromDiferencia))
+                            .addComponent(jLabel9))
+                        .addGap(0, 6, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -186,28 +200,79 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jLabel10))
+                    .addComponent(lblPromVendidas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel11))
+                    .addComponent(lblPromTiradas))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel13))
+                    .addComponent(lblPromUtilidad))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel12))
+                    .addComponent(lblPromDiferencia))
                 .addGap(29, 29, 29))
         );
+
+        jLabel5.getAccessibleContext().setAccessibleName("Promedio diario diario de tortas tiradas:");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSimularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimularActionPerformed
-        // TODO add your handling code here:
+        if (validar()){
+            double acumVentas=0;
+            double acumTiradas=0;
+            double acumUtilidad=0;
+            double acumDiferencia=0;
+
+            boolean mostrar=ckbMostrar.isSelected();
+            Resultados r;
+            eliminarFilas();
+
+            int semanas=Integer.parseInt(txtSemanas.getText());
+            int dia=cmbDia.getSelectedIndex()+1;
+            double cantSemanas=semanas-1+dia/7;
+
+            for (int i = 0; i < semanas-1; i++) {
+                s=new Simulacion(7);
+                r=s.simular();
+
+                acumVentas+=r.getPromVendidas();
+                acumTiradas+=r.getPromTiradas();
+                acumUtilidad+=r.getPromUtilidad();
+                acumDiferencia+=r.getDifConPermiso();
+
+                if(mostrar)
+                    agregarFila(r);   
+            }
+            s=new Simulacion(dia);
+            r=s.simular();
+            acumVentas+=r.getPromVendidas();
+            acumTiradas+=r.getPromTiradas();
+            acumUtilidad+=r.getPromUtilidad();
+            acumDiferencia+=r.getDifConPermiso();
+            if(mostrar)
+                agregarFila(r);
+
+            lblPromVendidas.setText(String.format("%.2f", (acumVentas/cantSemanas)));
+            lblPromTiradas.setText(String.format("%.2f", (acumTiradas/cantSemanas)));
+            lblPromUtilidad.setText("$ "+String.format("%.2f", (acumUtilidad/cantSemanas)));
+            lblPromDiferencia.setText("$ "+String.format("%.2f", (acumDiferencia/cantSemanas)));
+        }
     }//GEN-LAST:event_btnSimularActionPerformed
+
+    
+    private void ckbMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckbMostrarActionPerformed
+        if (ckbMostrar.isSelected()){
+            // LIMPIAR GRILLA
+            jTable1.setEnabled(false);
+        }
+        else
+            jTable1.setEnabled(true);
+    }//GEN-LAST:event_ckbMostrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -250,10 +315,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JCheckBox ckbMostrar;
     private javax.swing.JComboBox<String> cmbDia;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -264,6 +325,43 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblPromDiferencia;
+    private javax.swing.JLabel lblPromTiradas;
+    private javax.swing.JLabel lblPromUtilidad;
+    private javax.swing.JLabel lblPromVendidas;
     private javax.swing.JTextField txtSemanas;
     // End of variables declaration//GEN-END:variables
+
+    private void agregarFila(Resultados s) {
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.addRow(new Object[]{s.getPromVendidas(),s.getPromTiradas(),s.getPromUtilidad(),s.getDifConPermiso()}); 
+   }
+    
+    private void eliminarFilas(){
+        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        model.setRowCount(0);
+    }
+
+    private void cargarCombo() {
+        this.cmbDia.removeAllItems();
+        this.cmbDia.addItem("Lunes");
+        this.cmbDia.addItem("Martes");
+        this.cmbDia.addItem("Miercoles");
+        this.cmbDia.addItem("Jueves");
+        this.cmbDia.addItem("Viernes");
+        this.cmbDia.addItem("Sábado");
+        this.cmbDia.addItem("Domingo");
+    }
+    private boolean isNumeric(String s) {  
+        return s != null && s.matches("[-+]?\\d*\\.?\\d+");  
+    }  
+
+    private boolean validar() {
+        if(isNumeric(txtSemanas.getText())==false){
+            JOptionPane.showMessageDialog(null, "Ingrese un número válido.");
+            return false;
+        }
+        else
+            return true;
+    }
 }

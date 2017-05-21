@@ -37,21 +37,22 @@ public class GUI extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         txtSemanas = new javax.swing.JTextField();
-        cmbDia = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        ckbMostrar = new javax.swing.JCheckBox();
-        jLabel8 = new javax.swing.JLabel();
         btnSimular = new javax.swing.JButton();
         lblPromVendidas = new javax.swing.JLabel();
         lblPromTiradas = new javax.swing.JLabel();
         lblPromDiferencia = new javax.swing.JLabel();
         lblPromUtilidad = new javax.swing.JLabel();
+        txtDesde = new javax.swing.JTextField();
+        txtHasta = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        cmbDiasPorSemana = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TP4 - Simulación ");
@@ -62,14 +63,14 @@ public class GUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Tortas vendidas", "Tortas tiradas", "Utilidad", "Diferencia"
+                "Semana", "Día", "RND", "Demanda", "Tortas tiradas", "RND", "Multa", "Utilidad", "Ac. Ventas", "Ac. Tiradas", "Ac. Utilidad", "Ac. Multas"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -86,15 +87,21 @@ public class GUI extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(1).setResizable(false);
             jTable1.getColumnModel().getColumn(2).setResizable(false);
             jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
+            jTable1.getColumnModel().getColumn(6).setResizable(false);
+            jTable1.getColumnModel().getColumn(7).setResizable(false);
+            jTable1.getColumnModel().getColumn(8).setResizable(false);
+            jTable1.getColumnModel().getColumn(9).setResizable(false);
+            jTable1.getColumnModel().getColumn(10).setResizable(false);
+            jTable1.getColumnModel().getColumn(11).setResizable(false);
         }
 
         jLabel1.setText("Simular");
 
-        cmbDia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel2.setText("semanas");
 
-        jLabel3.setText("Último día:");
+        jLabel3.setText("Simular desde");
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel4.setText("Promedio diario de tortas vendidas:");
@@ -108,17 +115,6 @@ public class GUI extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel7.setText("Diferencia promedio diaria de utilidad al no pagar permiso:");
 
-        ckbMostrar.setSelected(true);
-        ckbMostrar.setText("Mostrar cada semana");
-        ckbMostrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ckbMostrarActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
-        jLabel8.setText("Todas las columnas de la tabla representan promedios diarios.");
-
         btnSimular.setText("Simular");
         btnSimular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,8 +122,22 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Ubuntu", 2, 15)); // NOI18N
-        jLabel9.setText("La diferencia representa la utilidad actual frente a la utilidad pagando el permiso.");
+        txtHasta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtHastaActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("hasta");
+
+        jLabel9.setText("Días por semana");
+
+        cmbDiasPorSemana.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbDiasPorSemana.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbDiasPorSemanaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -136,7 +146,7 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1107, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -144,18 +154,25 @@ public class GUI extends javax.swing.JFrame {
                                     .addComponent(jLabel1)
                                     .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtSemanas)
-                                    .addComponent(cmbDia, 0, 103, Short.MAX_VALUE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(113, 113, 113)
-                                        .addComponent(btnSimular))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(txtSemanas, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(54, 54, 54)
-                                        .addComponent(ckbMostrar))))
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(24, 24, 24)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnSimular)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cmbDiasPorSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -168,13 +185,11 @@ public class GUI extends javax.swing.JFrame {
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblPromUtilidad))
-                            .addComponent(jLabel8)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblPromDiferencia))
-                            .addComponent(jLabel9))
-                        .addGap(0, 6, Short.MAX_VALUE)))
+                                .addComponent(lblPromDiferencia)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -185,18 +200,17 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(jLabel1)
                     .addComponent(txtSemanas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(ckbMostrar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
                     .addComponent(btnSimular))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel9)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel9)
+                    .addComponent(cmbDiasPorSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
@@ -223,57 +237,36 @@ public class GUI extends javax.swing.JFrame {
 
     private void btnSimularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimularActionPerformed
         if (validar()){
-            double acumVentas=0;
-            double acumTiradas=0;
-            double acumUtilidad=0;
-            double acumDiferencia=0;
-
-            boolean mostrar=ckbMostrar.isSelected();
             Resultados r;
+            double[][] tabla;
             eliminarFilas();
 
             int semanas=Integer.parseInt(txtSemanas.getText());
-            int dia=cmbDia.getSelectedIndex()+1;
-            double cantSemanas=semanas-1+dia/7;
+            int semanasDesde=Integer.parseInt(txtDesde.getText());
+            int semanasHasta=Integer.parseInt(txtHasta.getText());
+            int diasPorSemana=cmbDiasPorSemana.getSelectedIndex()+1;
 
-            for (int i = 0; i < semanas-1; i++) {
-                s=new Simulacion(7);
-                r=s.simular();
+            s=new Simulacion(semanas,diasPorSemana,semanasDesde,semanasHasta);
+            tabla=s.simular();
+            r=s.getResultados();
+            mostrarTabla(tabla);   
 
-                acumVentas+=r.getPromVendidas();
-                acumTiradas+=r.getPromTiradas();
-                acumUtilidad+=r.getPromUtilidad();
-                acumDiferencia+=r.getDifConPermiso();
-
-                if(mostrar)
-                    agregarFila(r);   
-            }
-            s=new Simulacion(dia);
-            r=s.simular();
-            acumVentas+=r.getPromVendidas();
-            acumTiradas+=r.getPromTiradas();
-            acumUtilidad+=r.getPromUtilidad();
-            acumDiferencia+=r.getDifConPermiso();
-            if(mostrar)
-                agregarFila(r);
-
-            lblPromVendidas.setText(String.format("%.2f", (acumVentas/cantSemanas)));
-            lblPromTiradas.setText(String.format("%.2f", (acumTiradas/cantSemanas)));
-            lblPromUtilidad.setText("$ "+String.format("%.2f", (acumUtilidad/cantSemanas)));
-            lblPromDiferencia.setText("$ "+String.format("%.2f", (acumDiferencia/cantSemanas)));
+            lblPromVendidas.setText(String.format("%.2f", r.getPromVendidas()));
+            lblPromTiradas.setText(String.format("%.2f", r.getPromTiradas()));
+            lblPromUtilidad.setText("$ "+String.format("%.2f",r.getPromUtilidad()));
+            lblPromDiferencia.setText("$ "+String.format("%.2f", r.getDifConPermiso()));
         }
     }//GEN-LAST:event_btnSimularActionPerformed
 
-    
-    private void ckbMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ckbMostrarActionPerformed
-        if (ckbMostrar.isSelected()){
-            // LIMPIAR GRILLA
-            jTable1.setEnabled(false);
-        }
-        else
-            jTable1.setEnabled(true);
-    }//GEN-LAST:event_ckbMostrarActionPerformed
+    private void txtHastaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHastaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtHastaActionPerformed
 
+    private void cmbDiasPorSemanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDiasPorSemanaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbDiasPorSemanaActionPerformed
+
+    
     /**
      * @param args the command line arguments
      */
@@ -312,8 +305,7 @@ public class GUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSimular;
-    private javax.swing.JCheckBox ckbMostrar;
-    private javax.swing.JComboBox<String> cmbDia;
+    private javax.swing.JComboBox<String> cmbDiasPorSemana;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -329,12 +321,29 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel lblPromTiradas;
     private javax.swing.JLabel lblPromUtilidad;
     private javax.swing.JLabel lblPromVendidas;
+    private javax.swing.JTextField txtDesde;
+    private javax.swing.JTextField txtHasta;
     private javax.swing.JTextField txtSemanas;
     // End of variables declaration//GEN-END:variables
 
-    private void agregarFila(Resultados s) {
+    private void mostrarTabla(double[][] tabla) {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.addRow(new Object[]{s.getPromVendidas(),s.getPromTiradas(),s.getPromUtilidad(),s.getDifConPermiso()}); 
+        for (int i = 0; i < tabla.length; i++) {
+            model.addRow(new Object[]{
+                tabla[i][0],
+                tabla[i][1],
+                tabla[i][2],
+                tabla[i][3],
+                tabla[i][4],
+                tabla[i][5],
+                tabla[i][6],
+                tabla[i][7],
+                tabla[i][8],
+                tabla[i][9],
+                tabla[i][10],
+                tabla[i][11]
+            });
+        }
    }
     
     private void eliminarFilas(){
@@ -342,23 +351,32 @@ public class GUI extends javax.swing.JFrame {
         model.setRowCount(0);
     }
 
-    private void cargarCombo() {
-        this.cmbDia.removeAllItems();
-        this.cmbDia.addItem("Lunes");
-        this.cmbDia.addItem("Martes");
-        this.cmbDia.addItem("Miercoles");
-        this.cmbDia.addItem("Jueves");
-        this.cmbDia.addItem("Viernes");
-        this.cmbDia.addItem("Sábado");
-        this.cmbDia.addItem("Domingo");
-    }
     private boolean isNumeric(String s) {  
         return s != null && s.matches("[-+]?\\d*\\.?\\d+");  
     }  
+    
+    private void cargarCombo(){
+        cmbDiasPorSemana.removeAllItems();
+        cmbDiasPorSemana.addItem("1");
+        cmbDiasPorSemana.addItem("2");
+        cmbDiasPorSemana.addItem("3");
+        cmbDiasPorSemana.addItem("4");
+        cmbDiasPorSemana.addItem("5");
+        cmbDiasPorSemana.addItem("6");
+        cmbDiasPorSemana.addItem("7");
+    }
 
     private boolean validar() {
         if(isNumeric(txtSemanas.getText())==false){
             JOptionPane.showMessageDialog(null, "Ingrese un número válido.");
+            return false;
+        }
+        else if(isNumeric(txtDesde.getText())==false
+                || isNumeric(txtHasta.getText())==false ||
+                Integer.parseInt(txtDesde.getText())>Integer.parseInt(txtHasta.getText())
+                || Integer.parseInt(txtHasta.getText())>Integer.parseInt(txtSemanas.getText()))
+        {
+            JOptionPane.showMessageDialog(null, "Los números ingresados no son válidos.");
             return false;
         }
         else

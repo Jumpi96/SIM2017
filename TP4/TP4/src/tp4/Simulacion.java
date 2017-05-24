@@ -23,6 +23,7 @@ public class Simulacion {
     [9]: Acumulador Tortas Tiradas.
     [10]: Acumulador Utilidad.
     [11]: Acumulador Multas.
+    [12]: Utilidad con permiso.
     */
     private double[][] tablaMostrar;
     private double[][] tabla;
@@ -37,7 +38,7 @@ public class Simulacion {
         this.tabla=new double[2][12];        
         this.mostrarDesde=semanasDesde;
         this.mostrarHasta=semanasHasta;
-        this.tablaMostrar=new double[(mostrarHasta+1-mostrarDesde)*diasSemana][12];
+        this.tablaMostrar=new double[(mostrarHasta+1-mostrarDesde)*diasSemana][13];
     }
     /*
     public Resultados simular(){
@@ -77,6 +78,7 @@ public class Simulacion {
                     tablaMostrar[contador][9]=tablaMostrar[contador][4]+tabla[1][9];
                     tablaMostrar[contador][10]=tablaMostrar[contador][7]+tabla[1][10];
                     tablaMostrar[contador][11]=tablaMostrar[contador][6]+tabla[1][11];
+                    tablaMostrar[contador][12]=-50*10+tablaMostrar[contador][3]*30-200/diasSemana;
 
                     tabla[1][8]=tablaMostrar[contador][8];
                     tabla[1][9]=tablaMostrar[contador][9];
@@ -132,9 +134,9 @@ public class Simulacion {
     }
     
     public Resultados getResultados(){
-        int dias=semanas*diasSemana;
-        double utilidadConPermiso=(-(50*10)*dias+tabla[1][8]*30-200)/dias;
-        double utilidadPrueba=(-(50*10)*dias+tabla[1][8]*30-300*tabla[1][11])/dias;
+        double dias=semanas*diasSemana;
+        double utilidadConPermiso=(-1*(50*10)*dias+tabla[1][8]*30-200*semanas)/dias;
+        double utilidadPrueba=(-1*(50*10)*dias+tabla[1][8]*30-300*tabla[1][11])/dias;
         double diferencia=(tabla[1][10]/dias)-utilidadConPermiso;
         Resultados r=new Resultados(tabla[1][10]/dias,
                                     tabla[1][9]/dias,

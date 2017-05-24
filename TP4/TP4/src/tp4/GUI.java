@@ -63,14 +63,14 @@ public class GUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Semana", "Día", "RND", "Demanda", "Tortas tiradas", "RND", "Multa", "Utilidad", "Ac. Ventas", "Ac. Tiradas", "Ac. Utilidad", "Ac. Multas"
+                "Semana", "Día", "RND", "Demanda", "Tortas tiradas", "RND", "Multa", "Utilidad", "Ac. Ventas", "Ac. Tiradas", "Ac. Utilidad", "Ac. Multas", "Utilidad con permiso"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -95,6 +95,7 @@ public class GUI extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(9).setResizable(false);
             jTable1.getColumnModel().getColumn(10).setResizable(false);
             jTable1.getColumnModel().getColumn(11).setResizable(false);
+            jTable1.getColumnModel().getColumn(12).setResizable(false);
         }
 
         jLabel1.setText("Simular");
@@ -341,7 +342,8 @@ public class GUI extends javax.swing.JFrame {
                 tabla[i][8],
                 tabla[i][9],
                 tabla[i][10],
-                tabla[i][11]
+                tabla[i][11],
+                tabla[i][12]
             });
         }
    }

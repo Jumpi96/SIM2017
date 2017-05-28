@@ -38,7 +38,13 @@ public class Simulacion {
         this.tabla=new double[2][12];        
         this.mostrarDesde=semanasDesde;
         this.mostrarHasta=semanasHasta;
-        this.tablaMostrar=new double[(mostrarHasta+1-mostrarDesde)*diasSemana][13];
+        int corrector;
+        if (mostrarDesde==0)
+            corrector=0;
+        else
+            corrector=1;
+        if (mostrarDesde !=mostrarHasta)
+            this.tablaMostrar=new double[(mostrarHasta+corrector-mostrarDesde)*diasSemana][13];
     }
     /*
     public Resultados simular(){
@@ -64,7 +70,7 @@ public class Simulacion {
     public double[][] simular(){
         int contador=0;
         for (int i = 0; i < semanas; i++) {
-            if(i+1>=mostrarDesde && i+1<=mostrarHasta){
+            if(i+1>=mostrarDesde && i+1<=mostrarHasta && mostrarDesde!=mostrarHasta){
                 for (int j = i*diasSemana; j < ((i+1)*diasSemana); j++) {    
                     tablaMostrar[contador][0]=i+1;
                     tablaMostrar[contador][1]=j-i*diasSemana+1;

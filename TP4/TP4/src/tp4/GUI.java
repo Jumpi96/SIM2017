@@ -63,7 +63,7 @@ public class GUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Semana", "Día", "RND", "Demanda", "Tortas tiradas", "RND", "Multa", "Utilidad", "Ac. Ventas", "Ac. Tiradas", "Ac. Utilidad", "Ac. Multas", "Utilidad con permiso"
+                "Semana", "Día", "RND", "Demanda", "Tiradas", "RND", "Multa", "Utilidad", "Ac. Ventas", "Ac. Tiradas", "Ac. Utilidad", "Ac. Multas", "Utilidad c/permiso"
             }
         ) {
             Class[] types = new Class [] {
@@ -84,25 +84,38 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(25);
             jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(25);
             jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(25);
             jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(30);
             jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(30);
             jTable1.getColumnModel().getColumn(5).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(25);
             jTable1.getColumnModel().getColumn(6).setResizable(false);
+            jTable1.getColumnModel().getColumn(6).setPreferredWidth(30);
             jTable1.getColumnModel().getColumn(7).setResizable(false);
+            jTable1.getColumnModel().getColumn(7).setPreferredWidth(30);
             jTable1.getColumnModel().getColumn(8).setResizable(false);
+            jTable1.getColumnModel().getColumn(8).setPreferredWidth(50);
             jTable1.getColumnModel().getColumn(9).setResizable(false);
+            jTable1.getColumnModel().getColumn(9).setPreferredWidth(50);
             jTable1.getColumnModel().getColumn(10).setResizable(false);
+            jTable1.getColumnModel().getColumn(10).setPreferredWidth(50);
             jTable1.getColumnModel().getColumn(11).setResizable(false);
+            jTable1.getColumnModel().getColumn(11).setPreferredWidth(50);
             jTable1.getColumnModel().getColumn(12).setResizable(false);
+            jTable1.getColumnModel().getColumn(12).setPreferredWidth(90);
         }
 
         jLabel1.setText("Simular");
 
         jLabel2.setText("semanas");
 
-        jLabel3.setText("Simular desde");
+        jLabel3.setText("Mostrar desde");
 
         jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
         jLabel4.setText("Promedio diario de tortas vendidas:");
@@ -147,7 +160,7 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1107, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1101, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -250,7 +263,8 @@ public class GUI extends javax.swing.JFrame {
             s=new Simulacion(semanas,diasPorSemana,semanasDesde,semanasHasta);
             tabla=s.simular();
             r=s.getResultados();
-            mostrarTabla(tabla);   
+            if (tabla!=null)
+                mostrarTabla(tabla);   
 
             lblPromVendidas.setText(String.format("%.2f", r.getPromVendidas()));
             lblPromTiradas.setText(String.format("%.2f", r.getPromTiradas()));

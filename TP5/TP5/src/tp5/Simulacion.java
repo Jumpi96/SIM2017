@@ -5,149 +5,183 @@
  */
 package tp5;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author juampilorenzo
  */
 public class Simulacion {
     /*
-    [0]: Semana.
-    [1]: Día (1: Lunes a 7: Domingo).
-    [2]: RND.
-    [3]: Demanda diaria.
-    [4]: Tortas tiradas.
-    [5]: RND.
-    [6]: ¿Debe pagar multa?
-    [7]: Utilidad.
-    [8]: Acumulador Tortas Vendidas.
-    [9]: Acumulador Tortas Tiradas.
-    [10]: Acumulador Utilidad.
-    [11]: Acumulador Multas.
-    [12]: Utilidad con permiso.
+    [0]: Estado.
+    [1]: Reloj.
+    [2]: RND Llegada.
+    [3]: Tiempo llegada.
+    [4]: Próxima llegada.
+    [5]: RND Tipo cliente.
+    [6]: Tipo cliente.
+    [7]: RND Demora carnicería.
+    [8]: Demora carnicería.
+    [9]: RND Carnicería+Verdulería.
+    [10]: Demora total carnicería.
+    [11]: Cola carnicería.
+    [12]: RND Demora fiambrería.
+    [13]: Demora fiambrería.
+    [14]: RND Fiambrería+Verdulería.
+    [15]: Demora total fiambrería.
+    [16]: Cola fiambrería.
+    [17]: Demora verdulería.
+    [18]: Estado Cliente 1.
+    [19]: Fin atención Cliente 1.
+    [20]: Cliente 2.
+    [21]: Fin atención Cliente 2.
+    [22]: Contador Clientes.
+    [23]: Acumulador tiempos de espera.
     */
-    private double[][] tablaMostrar;
-    private double[][] tabla;
-    private int semanas;
-    private int diasSemana;
+    private ArrayList<Object[]> tablaMostrar;
+    private Object[][] tabla;
+    private int dias;
+    private int horas;
     private int mostrarDesde;
     private int mostrarHasta;
 
-    public Simulacion(int semanas,int diasSemana,int semanasDesde, int semanasHasta) {
-        this.semanas=semanas;
-        this.diasSemana=diasSemana;
-        this.tabla=new double[2][12];        
-        this.mostrarDesde=semanasDesde;
-        this.mostrarHasta=semanasHasta;
+    public Simulacion(int dias,int horas,int diasDesde, int diasHasta) {
+        this.dias=dias;
+        this.horas=horas;
+        this.tabla=new Object[2][24];        
+        this.mostrarDesde=diasDesde;
+        this.mostrarHasta=diasHasta;
         int corrector;
         if (mostrarDesde==0)
             corrector=0;
         else
             corrector=1;
         if (mostrarDesde !=mostrarHasta)
-            this.tablaMostrar=new double[(mostrarHasta+corrector-mostrarDesde)*diasSemana][13];
+            this.tablaMostrar=new ArrayList<Object[]>();
     }
-    /*
-    public Resultados simular(){
-        for (int i = 0; i < dia; i++) {
-            tabla[0][0]=i+1;
-            tabla[0][1]=Math.random();
-            tabla[0][2]=getDemanda(tabla[0][1]);
-            tabla[0][3]=Math.random();
-            tabla[0][4]=pagaMulta(tabla[0][3]);
-            tabla[0][5]=tabla[0][2]+tabla[1][5];
-            tabla[0][6]=50-tabla[0][2]+tabla[1][6];
-            tabla[0][7]=-50*10+tabla[0][2]*30-tabla[0][4]*300+tabla[1][7];
-            tabla[0][8]=tabla[0][4]+tabla[1][8];
-            
-            tabla[1][5]=tabla[0][5];
-            tabla[1][6]=tabla[0][6];
-            tabla[1][7]=tabla[0][7];
-            tabla[1][8]=tabla[0][8];
-        }
-        return getResultados();
-    }*/
     
-    public double[][] simular(){
-        int contador=0;
-        for (int i = 0; i < semanas; i++) {
-            if(i+1>=mostrarDesde && i+1<=mostrarHasta && mostrarDesde!=mostrarHasta){
-                for (int j = i*diasSemana; j < ((i+1)*diasSemana); j++) {    
-                    tablaMostrar[contador][0]=i+1;
-                    tablaMostrar[contador][1]=j-i*diasSemana+1;
-                    tablaMostrar[contador][2]=Math.random();
-                    tablaMostrar[contador][3]=getDemanda(tablaMostrar[contador][2]);
-                    tablaMostrar[contador][4]=50-tablaMostrar[contador][3];
-                    tablaMostrar[contador][5]=Math.random();
-                    tablaMostrar[contador][6]=pagaMulta(tablaMostrar[contador][5]);
-                    tablaMostrar[contador][7]=-50*10+tablaMostrar[contador][3]*30-tablaMostrar[contador][6]*300;
-                    tablaMostrar[contador][8]=tablaMostrar[contador][3]+tabla[1][8];
-                    tablaMostrar[contador][9]=tablaMostrar[contador][4]+tabla[1][9];
-                    tablaMostrar[contador][10]=tablaMostrar[contador][7]+tabla[1][10];
-                    tablaMostrar[contador][11]=tablaMostrar[contador][6]+tabla[1][11];
-                    tablaMostrar[contador][12]=-50*10+tablaMostrar[contador][3]*30-200/diasSemana;
-
-                    tabla[1][8]=tablaMostrar[contador][8];
-                    tabla[1][9]=tablaMostrar[contador][9];
-                    tabla[1][10]=tablaMostrar[contador][10];
-                    tabla[1][11]=tablaMostrar[contador][11];
-                    
-                    contador++;
+    public ArrayList<Object[]> simular(){
+        Object[] row;
+        for (int i = 0; i < dias; i++) {
+            while((Double)tabla[1][1]<horas){
+                row = new Object[24];
+                row[0]=getEstado();
+                row[1]=tabla[1][1]+getProximo();
+                if(esLlegada()){
+                    row[2]=Math.random();
+                    row[3]=getTiempoLlegada(row[2]);
+                    row[4]=(double)row[1]+(double)row[3];
+                    row[5]=Math.random();
+                    row[6]=addCliente(row[5]); // agregas el cliente a la otra tabla
+                    row[7]="-";
+                    row[8]="-";
+                    row[9]="-";
+                    row[10]="-";
+                    row[11]=getColaCarniceria(row);
+                    row[12]="-";
+                    row[13]="-";
+                    row[14]="-";
+                    row[15]="-";
+                    row[16]=getColaFiambreria(row);
+                    row[17]="-";
+                    row[18]=tabla[1][18];
+                    row[19]="-";
+                    row[20]=tabla[1][20];
+                    row[21]="-";
+                    row[22]=(Integer)tabla[1][22]+1;
+                    row[23]=tabla[1][23];  
                 }
-            }
-            else{
-                for (int j = 0; j < diasSemana; j++) {    
-                    tabla[0][0]=i+1;
-                    tabla[0][1]=j+1;
-                    tabla[0][2]=Math.random();
-                    tabla[0][3]=getDemanda(tabla[0][2]);
-                    tabla[0][4]=50-tabla[0][3];
-                    tabla[0][5]=Math.random();
-                    tabla[0][6]=pagaMulta(tabla[0][5]);
-                    tabla[0][7]=-50*10+tabla[0][3]*30-tabla[0][6]*300;
-                    tabla[0][8]=tabla[0][3]+tabla[1][8];
-                    tabla[0][9]=tabla[0][4]+tabla[1][9];
-                    tabla[0][10]=tabla[0][7]+tabla[1][10];
-                    tabla[0][11]=tabla[0][6]+tabla[1][11];
-
-                    tabla[1][8]=tabla[0][8];
-                    tabla[1][9]=tabla[0][9];
-                    tabla[1][10]=tabla[0][10];
-                    tabla[1][11]=tabla[0][11];
+                else{
+                    row[2]="-";
+                    row[3]="-";
+                    row[4]=tabla[1][4];
+                    row[5]="-";
+                    row[6]=getProxCliente(row[1]); // le pasas el reloj para que lo busque
+                    if (row[6].equals("Carnicería")){
+                        row[7]=Math.random();
+                        row[8]=getDemoraCarniceria(row[7]);
+                        row[9]=Math.random();
+                        row[10]=getDemoraTotalCarniceria(row);
+                        row[11]=getColaCarniceria(row);
+                        row[12]="-";
+                        row[13]="-";
+                        row[14]="-";
+                        row[15]="-";
+                        row[16]="-";
+                        row[17]="-";
+                        row[18]=getCliente1(row);
+                        row[19]=getFinAtencionCliente1(row);
+                        row[20]=tabla[1][20];
+                        row[21]="-";
+                        row[22]=(Integer)tabla[1][22];
+                        row[23]=getTiempoEspera(row);
+                    }
+                    else if(row[6].equals("Fiambrería")){
+                        row[7]="-";
+                        row[8]="-";
+                        row[9]="-";
+                        row[10]="-";
+                        row[11]=tabla[1][11];
+                        row[12]=Math.random();
+                        row[13]=getDemoraFiambreria(row[12]);
+                        row[14]=Math.random();
+                        row[15]=getDemoraTotalFiambreria(row);
+                        row[16]=getColaFiambreria(row);
+                        row[17]="-";
+                        row[18]=tabla[1][18];
+                        row[19]="-";
+                        row[20]=getCliente2(row);
+                        row[21]=getFinAtencionCliente2(row);
+                        row[22]=(Integer)tabla[1][22];
+                        row[23]=getTiempoEspera(row);
+                    }
+                    else{
+                        row[7]="-";
+                        row[8]="-";
+                        row[9]="-";
+                        row[10]="-";
+                        row[11]=getColaCarniceria(row);
+                        row[12]="-";
+                        row[13]="-";
+                        row[14]="-";
+                        row[15]="-";
+                        row[16]=getColaFiambreria(row);
+                        row[17]=0.2/60;
+                        row[18]=tabla[1][18];
+                        row[19]="-";
+                        row[20]=tabla[1][20];
+                        row[21]="-";
+                        row[22]=(Integer)tabla[1][22];
+                        row[23]=getTiempoEspera(row);
+                    }
                 }
+
+                tablaMostrar.add(row);
+
+                tabla[1][1]=row[1];
+                tabla[1][4]=row[4];
+                tabla[1][11]=row[11];
+                tabla[1][16]=row[16];
+                tabla[1][18]=row[18];
+                if(!row[19].equals("-"))
+                    tabla[1][19]=row[19];
+                tabla[1][20]=row[20];
+                if(!row[21].equals("-"))
+                    tabla[1][21]=row[21];
+                tabla[1][22]=row[22];
+                tabla[1][23]=row[23];
+                if(i+1>=mostrarDesde && i+1<=mostrarHasta && mostrarDesde!=mostrarHasta)
+                    tablaMostrar.add(row);
+                else
+                    tabla[0]=row;
             }
         }
         return tablaMostrar;
     }
     
-    private int getDemanda(double rnd){
-        if (rnd<0.1)
-            return 10;
-        else if (rnd<0.30)
-            return 20;
-        else if (rnd<0.7)
-            return 25;
-        else if (rnd<0.8)
-            return 30;
-        else
-            return 50;
-    }
-    
-    private int pagaMulta(double rnd){
-        if (rnd<0.25)
-            return 1;
-        else
-            return 0;
-    }
-    
     public Resultados getResultados(){
-        double dias=semanas*diasSemana;
-        double utilidadConPermiso=(-1*(50*10)*dias+tabla[1][8]*30-200*semanas)/dias;
-        double utilidadPrueba=(-1*(50*10)*dias+tabla[1][8]*30-300*tabla[1][11])/dias;
-        double diferencia=(tabla[1][10]/dias)-utilidadConPermiso;
-        Resultados r=new Resultados(tabla[1][10]/dias,
-                                    tabla[1][9]/dias,
-                                    tabla[1][8]/dias,
-                                    diferencia);
+        Resultados r = new Resultados((double)tabla[1][23],
+                (double)tabla[1][22]);
         return r;
     }
 }

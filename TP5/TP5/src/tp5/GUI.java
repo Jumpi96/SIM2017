@@ -5,6 +5,7 @@
  */
 package tp5;
 
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -42,12 +43,10 @@ public class GUI extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         btnSimular = new javax.swing.JButton();
-        lblPromVendidas = new javax.swing.JLabel();
-        lblPromTiradas = new javax.swing.JLabel();
-        lblPromDiferencia = new javax.swing.JLabel();
-        lblPromUtilidad = new javax.swing.JLabel();
+        lblDemora = new javax.swing.JLabel();
+        lblClientes = new javax.swing.JLabel();
+        lblPromCliente = new javax.swing.JLabel();
         txtDesde = new javax.swing.JTextField();
         txtHasta = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -63,14 +62,14 @@ public class GUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Semana", "Día", "RND", "Demanda", "Tiradas", "RND", "Multa", "Utilidad", "Ac. Ventas", "Ac. Tiradas", "Ac. Utilidad", "Ac. Multas", "Utilidad c/permiso"
+                "Día", "Estado", "RND", "Tiempo llegada", "Próx. llegada", "RND", "Tipo Cliente", "RND", "Demora C", "RND", "Demora total C", "Cola C", "RND", "Demora F", "RND", "Demora total F", "Cola F", "Demora V", "Estado CC", "Fin At. CC", "Estado CF", "Fin At. CF", "Cont. Clientes", "Ac. Espera"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -84,50 +83,45 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(25);
             jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(25);
             jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(25);
             jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(30);
             jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(30);
             jTable1.getColumnModel().getColumn(5).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(25);
             jTable1.getColumnModel().getColumn(6).setResizable(false);
-            jTable1.getColumnModel().getColumn(6).setPreferredWidth(30);
             jTable1.getColumnModel().getColumn(7).setResizable(false);
-            jTable1.getColumnModel().getColumn(7).setPreferredWidth(30);
             jTable1.getColumnModel().getColumn(8).setResizable(false);
-            jTable1.getColumnModel().getColumn(8).setPreferredWidth(50);
             jTable1.getColumnModel().getColumn(9).setResizable(false);
-            jTable1.getColumnModel().getColumn(9).setPreferredWidth(50);
             jTable1.getColumnModel().getColumn(10).setResizable(false);
-            jTable1.getColumnModel().getColumn(10).setPreferredWidth(50);
             jTable1.getColumnModel().getColumn(11).setResizable(false);
-            jTable1.getColumnModel().getColumn(11).setPreferredWidth(50);
             jTable1.getColumnModel().getColumn(12).setResizable(false);
-            jTable1.getColumnModel().getColumn(12).setPreferredWidth(90);
+            jTable1.getColumnModel().getColumn(13).setResizable(false);
+            jTable1.getColumnModel().getColumn(14).setResizable(false);
+            jTable1.getColumnModel().getColumn(15).setResizable(false);
+            jTable1.getColumnModel().getColumn(16).setResizable(false);
+            jTable1.getColumnModel().getColumn(17).setResizable(false);
+            jTable1.getColumnModel().getColumn(18).setResizable(false);
+            jTable1.getColumnModel().getColumn(19).setResizable(false);
+            jTable1.getColumnModel().getColumn(20).setResizable(false);
+            jTable1.getColumnModel().getColumn(21).setResizable(false);
+            jTable1.getColumnModel().getColumn(22).setResizable(false);
+            jTable1.getColumnModel().getColumn(23).setResizable(false);
         }
 
         jLabel1.setText("Simular");
 
-        jLabel2.setText("semanas");
+        jLabel2.setText("días");
 
-        jLabel3.setText("Mostrar desde");
+        jLabel3.setText("Mostrar desde día");
 
-        jLabel4.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel4.setText("Promedio diario de tortas vendidas:");
+        jLabel4.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
+        jLabel4.setText("Demora total:");
 
-        jLabel5.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel5.setText("Promedio diario de tortas tiradas:");
+        jLabel5.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
+        jLabel5.setText("Clientes totales:");
 
         jLabel6.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel6.setText("Promedio de utilidad por día:");
-
-        jLabel7.setFont(new java.awt.Font("Ubuntu", 1, 15)); // NOI18N
-        jLabel7.setText("Diferencia promedio diaria de utilidad al no pagar permiso:");
+        jLabel6.setText("Demora promedio por cliente:");
 
         btnSimular.setText("Simular");
         btnSimular.addActionListener(new java.awt.event.ActionListener() {
@@ -144,7 +138,7 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel8.setText("hasta");
 
-        jLabel9.setText("Días por semana");
+        jLabel9.setText("Horas por día");
 
         cmbDiasPorSemana.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbDiasPorSemana.addActionListener(new java.awt.event.ActionListener() {
@@ -160,51 +154,43 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1101, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblDemora))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblClientes))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblPromCliente))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1234, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3))
+                                .addComponent(txtSemanas, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtSemanas, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jLabel8)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(24, 24, 24)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnSimular)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(12, 12, 12)
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(cmbDiasPorSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(btnSimular))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblPromVendidas))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel5)
+                                .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblPromTiradas))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6)
+                                .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabel9)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lblPromUtilidad))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(lblPromDiferencia)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(cmbDiasPorSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -228,20 +214,16 @@ public class GUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(lblPromVendidas))
+                    .addComponent(lblDemora))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(lblPromTiradas))
+                    .addComponent(lblClientes))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(lblPromUtilidad))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(lblPromDiferencia))
-                .addGap(29, 29, 29))
+                    .addComponent(lblPromCliente))
+                .addGap(59, 59, 59))
         );
 
         jLabel5.getAccessibleContext().setAccessibleName("Promedio diario diario de tortas tiradas:");
@@ -252,7 +234,7 @@ public class GUI extends javax.swing.JFrame {
     private void btnSimularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimularActionPerformed
         if (validar()){
             Resultados r;
-            double[][] tabla;
+            ArrayList<Object[]> tabla;
             eliminarFilas();
 
             int semanas=Integer.parseInt(txtSemanas.getText());
@@ -266,10 +248,9 @@ public class GUI extends javax.swing.JFrame {
             if (tabla!=null)
                 mostrarTabla(tabla);   
 
-            lblPromVendidas.setText(String.format("%.2f", r.getPromVendidas()));
-            lblPromTiradas.setText(String.format("%.2f", r.getPromTiradas()));
-            lblPromUtilidad.setText("$ "+String.format("%.2f",r.getPromUtilidad()));
-            lblPromDiferencia.setText("$ "+String.format("%.2f", r.getDifConPermiso()));
+            lblDemora.setText(String.format("%.2f", r.getDemora()));
+            lblClientes.setText(String.format("%.2f", r.getCantClientes()));
+            lblPromCliente.setText("$ "+String.format("%.2f",r.getPromDemora()));
         }
     }//GEN-LAST:event_btnSimularActionPerformed
 
@@ -327,37 +308,49 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JLabel lblPromDiferencia;
-    private javax.swing.JLabel lblPromTiradas;
-    private javax.swing.JLabel lblPromUtilidad;
-    private javax.swing.JLabel lblPromVendidas;
+    private javax.swing.JLabel lblClientes;
+    private javax.swing.JLabel lblDemora;
+    private javax.swing.JLabel lblPromCliente;
     private javax.swing.JTextField txtDesde;
     private javax.swing.JTextField txtHasta;
     private javax.swing.JTextField txtSemanas;
     // End of variables declaration//GEN-END:variables
 
-    private void mostrarTabla(double[][] tabla) {
+    private void mostrarTabla(ArrayList<Object[]> tabla) {
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        for (int i = 0; i < tabla.length; i++) {
+        Object[] temp;
+        for (int i = 0; i < tabla.size(); i++) {
+            temp=tabla.get(i);
             model.addRow(new Object[]{
-                tabla[i][0],
-                tabla[i][1],
-                tabla[i][2],
-                tabla[i][3],
-                tabla[i][4],
-                tabla[i][5],
-                tabla[i][6],
-                tabla[i][7],
-                tabla[i][8],
-                tabla[i][9],
-                tabla[i][10],
-                tabla[i][11],
-                tabla[i][12]
+                i+1,
+                temp[0],
+                temp[1],
+                temp[2],
+                temp[3],
+                temp[4],
+                temp[5],
+                temp[6],
+                temp[7],
+                temp[8],
+                temp[9],
+                temp[10],
+                temp[11],
+                temp[12],
+                temp[13],
+                temp[14],
+                temp[15],
+                temp[16],
+                temp[17],
+                temp[18],
+                temp[19],
+                temp[20],
+                temp[21],
+                temp[22],
+                temp[23]
             });
         }
    }
@@ -380,6 +373,23 @@ public class GUI extends javax.swing.JFrame {
         cmbDiasPorSemana.addItem("5");
         cmbDiasPorSemana.addItem("6");
         cmbDiasPorSemana.addItem("7");
+        cmbDiasPorSemana.addItem("8");
+        cmbDiasPorSemana.addItem("9");
+        cmbDiasPorSemana.addItem("10");
+        cmbDiasPorSemana.addItem("11");
+        cmbDiasPorSemana.addItem("12");
+        cmbDiasPorSemana.addItem("13");
+        cmbDiasPorSemana.addItem("14");
+        cmbDiasPorSemana.addItem("15");
+        cmbDiasPorSemana.addItem("16");
+        cmbDiasPorSemana.addItem("17");
+        cmbDiasPorSemana.addItem("18");
+        cmbDiasPorSemana.addItem("19");
+        cmbDiasPorSemana.addItem("20");
+        cmbDiasPorSemana.addItem("21");
+        cmbDiasPorSemana.addItem("22");
+        cmbDiasPorSemana.addItem("23");
+        cmbDiasPorSemana.addItem("24");
     }
 
     private boolean validar() {

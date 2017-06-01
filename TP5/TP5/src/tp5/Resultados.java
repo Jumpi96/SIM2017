@@ -10,33 +10,41 @@ package tp5;
  * @author juampilorenzo
  */
 public class Resultados {
-    private double promUtilidad;
-    private double promTiradas;
-    private double promVendidas;
-    private double difConPermiso;
+    private double demora;
+    private double cantClientes;
+    private double promDemora;
 
-    public Resultados(double promUtilidad, double promTiradas, double promCompradas, double difConPermiso) {
-        this.promUtilidad = promUtilidad;
-        this.promTiradas = promTiradas;
-        this.promVendidas = promCompradas;
-        this.difConPermiso = difConPermiso;
+    public Resultados(double demora, double cantClientes) {
+        this.demora = demora;
+        this.cantClientes = cantClientes;
+        this.promDemora = demora/cantClientes;
     }
 
-    public double getPromUtilidad() {
-        return promUtilidad;
+    public double getDemora() {
+        return demora;
     }
 
-    public double getPromTiradas() {
-        return promTiradas;
+    public void setDemora(double demora) {
+        this.demora = demora;
     }
 
-    public double getPromVendidas() {
-        return promVendidas;
+    public double getCantClientes() {
+        return cantClientes;
     }
 
-    public double getDifConPermiso() {
-        return difConPermiso;
+    public void setCantClientes(double cantClientes) {
+        this.cantClientes = cantClientes;
     }
+
+    public double getPromDemora() {
+        return promDemora;
+    }
+
+    public void setPromDemora(double promDemora) {
+        this.promDemora = promDemora;
+    }
+
+    
     
     
 }

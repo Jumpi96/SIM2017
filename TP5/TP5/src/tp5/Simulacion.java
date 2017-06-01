@@ -40,7 +40,7 @@ public class Simulacion {
     public Simulacion(int dias,int horas,int diasDesde, int diasHasta) {
         this.dias=dias;
         this.horas=horas;
-        this.tabla=new Object[2][24];        
+        inicializarTabla();
         this.mostrarDesde=diasDesde;
         this.mostrarHasta=diasHasta;
         int corrector;
@@ -63,7 +63,7 @@ public class Simulacion {
                 
                 if(esLlegada((float)row[1])){
                     row[2] = (float)Math.random();
-                    row[3] = getTiempoLlegada((float)0.5, (float)row[2]);
+                    row[3] = getTiempoLlegada(0.5F, (float)row[2]);
                     row[4] = (float)row[1] + (float)row[3];
                     row[5] = (float) Math.random();
                     row[6] = addCliente(row[5]); // agregas el cliente a la otra tabla
@@ -90,12 +90,12 @@ public class Simulacion {
                     row[3]="-";
                     row[4]=tabla[1][4];
                     row[5]="-";
-                    row[6]=getProxCliente(row[1]); // le pasas el reloj para que lo busque
+                    row[6] = getProxCliente(row[1]); // le pasas el reloj para que lo busque
                     if (row[6].equals("Carnicería")){
-                        row[7]=Math.random();
-                        row[8]=getDemoraCarniceria(row[7]);
-                        row[9]=Math.random();
-                        row[10]=getDemoraTotalCarniceria(row);
+                        row[7] = (float) Math.random();
+                        row[8] = getDemoraCarniceria((float)row[7]);
+                        row[9]= (float) Math.random();
+                        row[10]= getDemoraTotalCarniceria((float)row[8], (float)row[9]);
                         row[11]=getColaCarniceria(row);
                         row[12]="-";
                         row[13]="-";
@@ -116,10 +116,10 @@ public class Simulacion {
                         row[9]="-";
                         row[10]="-";
                         row[11]=tabla[1][11];
-                        row[12]=Math.random();
-                        row[13]=getDemoraFiambreria(row[12]);
-                        row[14]=Math.random();
-                        row[15]=getDemoraTotalFiambreria(row);
+                        row[12] = (float)Math.random();
+                        row[13] = getDemoraFiambreria((float)row[12]);
+                        row[14] = (float)Math.random();
+                        row[15] = getDemoraTotalFiambreria((float)row[13], (float)row[14]);
                         row[16]=getColaFiambreria(row);
                         row[17]="-";
                         row[18]=tabla[1][18];
@@ -204,37 +204,59 @@ public class Simulacion {
         return (float)((-1) * u * Math.log(1 - rnd));
     }
     
+    private float getDemoraCarniceria(float rnd){
+        return 1.5F + rnd * 2;
+    }
+    
+    private float getDemoraFiambreria(float rnd){
+        return 1 + rnd * 2;
+    }
+    
+    private float getDemoraTotalCarniceria(float demoraCarniceria, float rnd){
+        float retorno = demoraCarniceria;
+        if(rnd < 25) retorno += 0.2F;
+        
+        return retorno;
+    }
+    
+            
+    private float getDemoraTotalFiambreria(float demoraFiambreria, float rnd){
+        float retorno = demoraFiambreria;
+        if(rnd < 50) retorno += 0.2F;
+        
+        return retorno;
+    }
+    
     public Resultados getResultados(){
         Resultados r = new Resultados((double)tabla[1][23],
                 (double)tabla[1][22]);
         return r;
     }
     
-    
-        /*
-    [0]: Estado.
-    [1]: Reloj.
-    [2]: RND Llegada.
-    [3]: Tiempo llegada.
-    [4]: Próxima llegada.
-    [5]: RND Tipo cliente.
-    [6]: Tipo cliente.
-    [7]: RND Demora carnicería.
-    [8]: Demora carnicería.
-    [9]: RND Carnicería+Verdulería.
-    [10]: Demora total carnicería.
-    [11]: Cola carnicería.
-    [12]: RND Demora fiambrería.
-    [13]: Demora fiambrería.
-    [14]: RND Fiambrería+Verdulería.
-    [15]: Demora total fiambrería.
-    [16]: Cola fiambrería.
-    [17]: Demora verdulería.
-    [18]: Estado Cliente 1.
-    [19]: Fin atención Cliente 1.
-    [20]: Cliente 2.
-    [21]: Fin atención Cliente 2.
-    [22]: Contador Clientes.
-    [23]: Acumulador tiempos de espera.
-    */
+    private void inicializarTabla(){
+        this.tabla=new Object[2][24];  
+        
+        this.tabla[1][1] = 0.0F;
+        this.tabla[1][2] = (float)Math.random();
+        this.tabla[1][3] = getTiempoLlegada(0.5F, (float)this.tabla[1][2]);
+        this.tabla[1][4] = this.tabla[1][3];
+        this.tabla[1][5] = "-";
+        this.tabla[1][6] = "-";
+        this.tabla[1][7] = "-";
+        this.tabla[1][8] = "-";
+        this.tabla[1][9] = "-";
+        this.tabla[1][10] = "-";
+        this.tabla[1][11] = 0;
+        this.tabla[1][12] = "-";
+        this.tabla[1][13] = "-";
+        this.tabla[1][14] = "-";
+        this.tabla[1][15] = "-";
+        this.tabla[1][16] = 0;
+        this.tabla[1][17] = "-";
+        this.tabla[1][18] = "-";
+        this.tabla[1][19] = "-";
+        this.tabla[1][20] = "-";
+        this.tabla[1][21] = 0;
+        this.tabla[1][22] = 0;
+    }
 }

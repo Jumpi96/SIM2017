@@ -175,17 +175,43 @@ public class Simulacion {
     
     //Tengo que ver en la tabla cual de los 3 eventos se produce antes (llagada o fin de atención 1 o 2)
     private float getProximo(){
-        float proximaLlegada = (float)tabla[1][4];
-        float finAtencionCliente1 = (float)tabla[1][19];
-        float finAtencionCliente2 = (float)tabla[1][21];
         
-        return min (proximaLlegada, finAtencionCliente1, finAtencionCliente2);
+        float proximaLlegada = proximaLlegada = (float)tabla[1][4];
+        float finAtencionCliente1 = 0.0f;
+        float finAtencionCliente2 = 0.0f;
+        
+        float retorno = proximaLlegada;
+        
+        if (tabla[1][19].toString().compareTo("-")  != 0)
+            finAtencionCliente1 = (float)tabla[1][19];
+        if (tabla[1][21].toString().compareTo("-")  != 0)
+            finAtencionCliente2 = (float)tabla[1][21];
+        
+        if(finAtencionCliente1 == 0 && finAtencionCliente2 == 0){   
+        
+        }else if(finAtencionCliente1 == 0){
+            retorno = min (proximaLlegada, finAtencionCliente2);
+        }else if(finAtencionCliente2 == 0){
+            retorno = min (proximaLlegada, finAtencionCliente1);
+        }else{
+            retorno = min (proximaLlegada, finAtencionCliente1, finAtencionCliente2);
+        }
+            
+        return retorno;
     }
     
     private float min (float a, float b, float c){
+        
         float retorno = c;
         if(a <= b && a <= c) retorno = a;
         else if (b <= a && b <= c) retorno = b;
+        
+        return retorno;
+    }
+    
+    private float min (float a, float b){
+        float retorno = b;
+        if(a < b) retorno = a;
         
         return retorno;
     }
@@ -259,4 +285,33 @@ public class Simulacion {
         this.tabla[1][21] = 0;
         this.tabla[1][22] = 0;
     }
+    
+        /*
+    [0]: Estado.
+    [1]: Reloj.
+    [2]: RND Llegada.
+    [3]: Tiempo llegada.
+    [4]: Próxima llegada.
+    [5]: RND Tipo cliente.
+    [6]: Tipo cliente.
+    [7]: RND Demora carnicería.
+    [8]: Demora carnicería.
+    [9]: RND Carnicería+Verdulería.
+    [10]: Demora total carnicería.
+    [11]: Cola carnicería.
+    [12]: RND Demora fiambrería.
+    [13]: Demora fiambrería.
+    [14]: RND Fiambrería+Verdulería.
+    [15]: Demora total fiambrería.
+    [16]: Cola fiambrería.
+    [17]: Demora verdulería.
+    [18]: Estado Cliente 1.
+    [19]: Fin atención Cliente 1.
+    [20]: Cliente 2.
+    [21]: Fin atención Cliente 2.
+    [22]: Contador Clientes.
+    [23]: Acumulador tiempos de espera.
+    */
+    
+    
 }

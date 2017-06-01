@@ -36,10 +36,8 @@ public class Simulacion {
     private int horas;
     private int mostrarDesde;
     private int mostrarHasta;
-    private CongruencialMixto random;
 
     public Simulacion(int dias,int horas,int diasDesde, int diasHasta) {
-        this.random = new CongruencialMixto();
         this.dias=dias;
         this.horas=horas;
         this.tabla=new Object[2][24];        

@@ -376,9 +376,11 @@ public class Simulacion {
         String cadena="";
         Object[] actual;
         boolean primero=true;
+        int corrector=0;
         for (int i = 0; i < colaCarniceria.size(); i++) {
             if (primero && obj!=null){
                 primero=false;
+                corrector=1;
                 continue;
             }
             actual=colaCarniceria.get(i);
@@ -387,18 +389,20 @@ public class Simulacion {
             else
                 cadena+="V ";
         }
-        if(colaCarniceria.size()==0)
+        if((colaCarniceria.size()-corrector)==0)
             return "-";
         else
-            return "(" + colaCarniceria.size() + ") " + cadena;
+            return "(" + (colaCarniceria.size()-corrector) + ") " + cadena;
     }
     private String getColaFiambreria(Object[] obj){
         String cadena="";
         Object[] actual;
+        int corrector=0;
         boolean primero=true;
         for (int i = 0; i < colaFiambreria.size(); i++) {
             if (primero && obj!=null){
                 primero=false;
+                corrector=1;
                 continue;
             }
             actual=colaFiambreria.get(i);
@@ -407,10 +411,10 @@ public class Simulacion {
             else
                 cadena+="V ";
         }
-        if(colaFiambreria.size()==0)
+        if((colaFiambreria.size()-0)==0)
             return "-";
         else
-            return "(" + colaFiambreria.size() + ") " + cadena;
+            return "(" + (colaFiambreria.size()-corrector) + ") " + cadena;
     }
     private double getFinAtencionCliente1 (Object[] row){
         if(row[10].getClass()==String.class)
@@ -555,16 +559,16 @@ public class Simulacion {
     }
     
     private float getDemoraCarniceria(float rnd){
-        return 1.5F + rnd * 1;
+        return 0.5F + rnd * 2;
     }
     
     private float getDemoraFiambreria(float rnd){
-        return 2 + rnd * 1;
+        return 1 + rnd * 2;
     }
     
     private double getDemoraTotalCarniceria(float demoraCarniceria, float rnd){
         double retorno = demoraCarniceria;
-        if(rnd < 0.25) retorno += 0.2F;
+        if(rnd < 0.50) retorno += 0.2F;
         
         return retorno;
     }
@@ -572,7 +576,7 @@ public class Simulacion {
             
     private double getDemoraTotalFiambreria(float demoraFiambreria, float rnd){
         double retorno = demoraFiambreria;
-        if(rnd < 0.50) retorno += 0.2F;
+        if(rnd < 0.25) retorno += 0.2F;
         
         return retorno;
     }

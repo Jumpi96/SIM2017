@@ -53,7 +53,7 @@ public class GUI extends javax.swing.JFrame {
         txtHasta = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        cmbDiasPorSemana = new javax.swing.JComboBox<String>();
+        cmbDiasPorSemana = new javax.swing.JComboBox<>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
 
@@ -66,11 +66,11 @@ public class GUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Reloj", "RND", "Demora F", "RND", "Demora total F", "Cola F", "Demora V", "Estado CC", "Fin At. CC", "Estado CF", "Fin At. CF", "Σ Clientes", "Σ Demora"
+                "Día", "Reloj", "RND", "Demora F", "RND", "Demora total F", "Cola F", "Demora V", "Estado CC", "Fin At. CC", "Estado CF", "Fin At. CF", "Σ Clientes", "Σ Demora"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -82,31 +82,32 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(75);
             jTable1.getColumnModel().getColumn(1).setResizable(false);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(50);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(75);
             jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(75);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(50);
             jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(50);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(75);
             jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(125);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(50);
             jTable1.getColumnModel().getColumn(5).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(75);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(125);
             jTable1.getColumnModel().getColumn(6).setResizable(false);
-            jTable1.getColumnModel().getColumn(6).setPreferredWidth(85);
+            jTable1.getColumnModel().getColumn(6).setPreferredWidth(75);
             jTable1.getColumnModel().getColumn(7).setResizable(false);
-            jTable1.getColumnModel().getColumn(7).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(7).setPreferredWidth(85);
             jTable1.getColumnModel().getColumn(8).setResizable(false);
-            jTable1.getColumnModel().getColumn(8).setPreferredWidth(75);
+            jTable1.getColumnModel().getColumn(8).setPreferredWidth(100);
             jTable1.getColumnModel().getColumn(9).setResizable(false);
-            jTable1.getColumnModel().getColumn(9).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(9).setPreferredWidth(75);
             jTable1.getColumnModel().getColumn(10).setResizable(false);
-            jTable1.getColumnModel().getColumn(10).setPreferredWidth(75);
+            jTable1.getColumnModel().getColumn(10).setPreferredWidth(100);
             jTable1.getColumnModel().getColumn(11).setResizable(false);
-            jTable1.getColumnModel().getColumn(11).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(11).setPreferredWidth(75);
             jTable1.getColumnModel().getColumn(12).setResizable(false);
             jTable1.getColumnModel().getColumn(12).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(13).setResizable(false);
+            jTable1.getColumnModel().getColumn(13).setPreferredWidth(100);
         }
 
         jLabel1.setText("Simular");
@@ -141,7 +142,7 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel9.setText("Horas por día");
 
-        cmbDiasPorSemana.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbDiasPorSemana.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbDiasPorSemana.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbDiasPorSemanaActionPerformed(evt);
@@ -153,7 +154,7 @@ public class GUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Día", "Estado", "Reloj", "RND", "Tiempo llegada", "Próx. llegada", "RND", "Tipo Cliente", "RND", "Demora C", "RND", "Demora total C", "Cola C"
+                "Día", "Reloj", "Estado", "RND", "Tiempo llegada", "Próx. llegada", "RND", "Tipo Cliente", "RND", "Demora C", "RND", "Demora total C", "Cola C"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -170,9 +171,9 @@ public class GUI extends javax.swing.JFrame {
             jTable2.getColumnModel().getColumn(0).setResizable(false);
             jTable2.getColumnModel().getColumn(0).setPreferredWidth(50);
             jTable2.getColumnModel().getColumn(1).setResizable(false);
-            jTable2.getColumnModel().getColumn(1).setPreferredWidth(50);
+            jTable2.getColumnModel().getColumn(1).setPreferredWidth(100);
             jTable2.getColumnModel().getColumn(2).setResizable(false);
-            jTable2.getColumnModel().getColumn(2).setPreferredWidth(100);
+            jTable2.getColumnModel().getColumn(2).setPreferredWidth(50);
             jTable2.getColumnModel().getColumn(3).setResizable(false);
             jTable2.getColumnModel().getColumn(3).setPreferredWidth(125);
             jTable2.getColumnModel().getColumn(4).setResizable(false);
@@ -399,8 +400,8 @@ public class GUI extends javax.swing.JFrame {
                 tiempoF=(String)temp[21];
             model.addRow(new Object[]{
                 temp[24],
-                temp[0],
                 temp[1],
+                temp[0],
                 temp[2],
                 temp[3],
                 temp[4],
@@ -413,6 +414,7 @@ public class GUI extends javax.swing.JFrame {
                 temp[11]
             });
             model2.addRow(new Object[]{
+                temp[24],
                 temp[1],
                 temp[12],
                 temp[13],
@@ -421,9 +423,9 @@ public class GUI extends javax.swing.JFrame {
                 temp[16],
                 temp[17],
                 temp[18],
-                tiempoC.equals("99.0") ? "-": tiempoC,
+                tiempoC.equals("10000.0") ? "-": tiempoC,
                 temp[20],
-                tiempoF.equals("99.0") ? "-": tiempoF,
+                tiempoF.equals("10000.0") ? "-": tiempoF,
                 temp[22],
                 temp[23]
             });
@@ -443,8 +445,8 @@ public class GUI extends javax.swing.JFrame {
     }  
     private void ajustarColumnas(){
         jTable2.getColumnModel().getColumn(0).setPreferredWidth(30);
-        jTable2.getColumnModel().getColumn(1).setPreferredWidth(120);
-        jTable2.getColumnModel().getColumn(2).setPreferredWidth(80);
+        jTable2.getColumnModel().getColumn(1).setPreferredWidth(80);
+        jTable2.getColumnModel().getColumn(2).setPreferredWidth(120);
         jTable2.getColumnModel().getColumn(3).setPreferredWidth(50);
         jTable2.getColumnModel().getColumn(4).setPreferredWidth(120);
         jTable2.getColumnModel().getColumn(5).setPreferredWidth(120);
@@ -456,20 +458,20 @@ public class GUI extends javax.swing.JFrame {
         jTable2.getColumnModel().getColumn(11).setPreferredWidth(120);
         jTable2.getColumnModel().getColumn(12).setPreferredWidth(100);
         
-        jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
-        jTable1.getColumnModel().getColumn(1).setPreferredWidth(50);
-        jTable1.getColumnModel().getColumn(2).setPreferredWidth(75);
-        jTable1.getColumnModel().getColumn(3).setPreferredWidth(50);
-        jTable1.getColumnModel().getColumn(4).setPreferredWidth(120);
-        jTable1.getColumnModel().getColumn(5).setPreferredWidth(100);
-        jTable1.getColumnModel().getColumn(6).setPreferredWidth(75);
-        jTable1.getColumnModel().getColumn(7).setPreferredWidth(90);
-        jTable1.getColumnModel().getColumn(8).setPreferredWidth(75);
-        jTable1.getColumnModel().getColumn(9).setPreferredWidth(90);
-        jTable1.getColumnModel().getColumn(10).setPreferredWidth(75);
-        jTable1.getColumnModel().getColumn(11).setPreferredWidth(90);
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(30);
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(80);
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(50);
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(75);
+        jTable1.getColumnModel().getColumn(4).setPreferredWidth(50);
+        jTable1.getColumnModel().getColumn(5).setPreferredWidth(120);
+        jTable1.getColumnModel().getColumn(6).setPreferredWidth(100);
+        jTable1.getColumnModel().getColumn(7).setPreferredWidth(75);
+        jTable1.getColumnModel().getColumn(8).setPreferredWidth(90);
+        jTable1.getColumnModel().getColumn(9).setPreferredWidth(75);
+        jTable1.getColumnModel().getColumn(10).setPreferredWidth(90);
+        jTable1.getColumnModel().getColumn(11).setPreferredWidth(75);
         jTable1.getColumnModel().getColumn(12).setPreferredWidth(90);
-        //...
+        jTable1.getColumnModel().getColumn(13).setPreferredWidth(90);
     }
     
     private void cargarCombo(){

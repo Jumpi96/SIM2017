@@ -157,8 +157,8 @@ public class Simulacion {
                             row[15]="-";
                             row[16]=tabla[1][16];
                             row[17]=(double)0.2/1;
-                            row[18]=tabla[1][20];
-                            row[19]=tabla[1][21];
+                            row[18]=tabla[1][18];
+                            row[19]=tabla[1][19];
                             row[20]=getCliente2(row);
                             row[21]=getFinAtencionCliente2(row);
                             row[22]=(Integer)tabla[1][22]+1;
@@ -323,15 +323,15 @@ public class Simulacion {
                         row[17]="-";
                         if((double)row[1]==(double)tabla[1][19]){
                             row[18]="Libre";
-                            row[19]=Double.valueOf("99");
+                            row[19]=Double.valueOf("10000");
                             row[20]=tabla[1][20];
                             row[21]="-";
                         }
                         else{
-                            row[18]=tabla[1][20];
+                            row[18]=tabla[1][18];
                             row[19]="-";
                             row[20]="Libre";
-                            row[21]=Double.valueOf("99");
+                            row[21]=Double.valueOf("10000");
                         }
                         //row[20]=getCliente2(row);
                         //row[21]="-";
@@ -342,14 +342,12 @@ public class Simulacion {
                 
                 /*
                 CONTROL
-                */
-                if(row[19].getClass()==Double.class){
-                    if ((double)row[19]==99 && colaCarniceria.size()!=0) {
-                        System.out.println("");
-                    }
-                }
-                    
                 
+                 */ 
+                
+                if((double)row[1]==(double)tabla[1][1] && !((String)row[0]).equals("Fin del dia")){
+                    System.out.println("");                    
+                }
 
                 tabla[1][0]=row[0];
                 tabla[1][1]=row[1];
@@ -539,8 +537,8 @@ public class Simulacion {
             return (double)tabla[1][21];
         else{
             double proxLlegada =(double)tabla[1][1];
-            double finCliente1 = (double)tabla[1][19]==99 ? 0 : (double)tabla[1][19];
-            double finCliente2 = (double)tabla[1][21]==99 ? 0 : (double)tabla[1][21];
+            double finCliente1 = (double)tabla[1][19]==10000 ? 0 : (double)tabla[1][19];
+            double finCliente2 = (double)tabla[1][21]==10000 ? 0 : (double)tabla[1][21];
 
             if (proxLlegada>finCliente1 && proxLlegada>finCliente2)
                 return proxLlegada;
@@ -607,9 +605,9 @@ public class Simulacion {
         this.tabla[1][16] = "-";
         this.tabla[1][17] = "-";
         this.tabla[1][18] = "Libre";
-        this.tabla[1][19] = Double.valueOf("99"); // numero arbitrario grande
+        this.tabla[1][19] = Double.valueOf("10000"); // numero arbitrario grande
         this.tabla[1][20] = "Libre";
-        this.tabla[1][21] = Double.valueOf("99");
+        this.tabla[1][21] = Double.valueOf("10000");
         this.tabla[1][22] = 0;
         this.tabla[1][23] = acumuladorEspera;
         this.tabla[1][24] = i+1;

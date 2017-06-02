@@ -11,10 +11,10 @@ package tp5;
  */
 public class Resultados {
     private double demora;
-    private double cantClientes;
+    private int cantClientes;
     private double promDemora;
 
-    public Resultados(double demora, double cantClientes) {
+    public Resultados(double demora, int cantClientes) {
         this.demora = demora;
         this.cantClientes = cantClientes;
         this.promDemora = demora/cantClientes;
@@ -28,11 +28,11 @@ public class Resultados {
         this.demora = demora;
     }
 
-    public double getCantClientes() {
+    public int getCantClientes() {
         return cantClientes;
     }
 
-    public void setCantClientes(double cantClientes) {
+    public void setCantClientes(int cantClientes) {
         this.cantClientes = cantClientes;
     }
 

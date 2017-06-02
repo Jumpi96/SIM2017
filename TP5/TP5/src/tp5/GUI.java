@@ -8,6 +8,7 @@ package tp5;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -23,6 +24,7 @@ public class GUI extends javax.swing.JFrame {
     public GUI() {
         initComponents();
         cargarCombo();
+        ajustarColumnas();
     }
 
     /**
@@ -52,6 +54,8 @@ public class GUI extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         cmbDiasPorSemana = new javax.swing.JComboBox<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TP4 - Simulación ");
@@ -62,50 +66,47 @@ public class GUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Día", "Estado", "RND", "Tiempo llegada", "Próx. llegada", "RND", "Tipo Cliente", "RND", "Demora C", "RND", "Demora total C", "Cola C", "RND", "Demora F", "RND", "Demora total F", "Cola F", "Demora V", "Estado CC", "Fin At. CC", "Estado CF", "Fin At. CF", "Cont. Clientes", "Ac. Espera"
+                "Reloj", "RND", "Demora F", "RND", "Demora total F", "Cola F", "Demora V", "Estado CC", "Fin At. CC", "Estado CF", "Fin At. CF", "Σ Clientes", "Σ Demora"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Double.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(75);
             jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(50);
             jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(75);
             jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(50);
             jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(125);
             jTable1.getColumnModel().getColumn(5).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(75);
             jTable1.getColumnModel().getColumn(6).setResizable(false);
+            jTable1.getColumnModel().getColumn(6).setPreferredWidth(85);
             jTable1.getColumnModel().getColumn(7).setResizable(false);
+            jTable1.getColumnModel().getColumn(7).setPreferredWidth(100);
             jTable1.getColumnModel().getColumn(8).setResizable(false);
+            jTable1.getColumnModel().getColumn(8).setPreferredWidth(75);
             jTable1.getColumnModel().getColumn(9).setResizable(false);
+            jTable1.getColumnModel().getColumn(9).setPreferredWidth(100);
             jTable1.getColumnModel().getColumn(10).setResizable(false);
+            jTable1.getColumnModel().getColumn(10).setPreferredWidth(75);
             jTable1.getColumnModel().getColumn(11).setResizable(false);
+            jTable1.getColumnModel().getColumn(11).setPreferredWidth(100);
             jTable1.getColumnModel().getColumn(12).setResizable(false);
-            jTable1.getColumnModel().getColumn(13).setResizable(false);
-            jTable1.getColumnModel().getColumn(14).setResizable(false);
-            jTable1.getColumnModel().getColumn(15).setResizable(false);
-            jTable1.getColumnModel().getColumn(16).setResizable(false);
-            jTable1.getColumnModel().getColumn(17).setResizable(false);
-            jTable1.getColumnModel().getColumn(18).setResizable(false);
-            jTable1.getColumnModel().getColumn(19).setResizable(false);
-            jTable1.getColumnModel().getColumn(20).setResizable(false);
-            jTable1.getColumnModel().getColumn(21).setResizable(false);
-            jTable1.getColumnModel().getColumn(22).setResizable(false);
-            jTable1.getColumnModel().getColumn(23).setResizable(false);
+            jTable1.getColumnModel().getColumn(12).setPreferredWidth(100);
         }
 
         jLabel1.setText("Simular");
@@ -147,6 +148,52 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Día", "Estado", "Reloj", "RND", "Tiempo llegada", "Próx. llegada", "RND", "Tipo Cliente", "RND", "Demora C", "RND", "Demora total C", "Cola C"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable2.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        jScrollPane2.setViewportView(jTable2);
+        if (jTable2.getColumnModel().getColumnCount() > 0) {
+            jTable2.getColumnModel().getColumn(0).setResizable(false);
+            jTable2.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jTable2.getColumnModel().getColumn(1).setResizable(false);
+            jTable2.getColumnModel().getColumn(1).setPreferredWidth(50);
+            jTable2.getColumnModel().getColumn(2).setResizable(false);
+            jTable2.getColumnModel().getColumn(2).setPreferredWidth(100);
+            jTable2.getColumnModel().getColumn(3).setResizable(false);
+            jTable2.getColumnModel().getColumn(3).setPreferredWidth(125);
+            jTable2.getColumnModel().getColumn(4).setResizable(false);
+            jTable2.getColumnModel().getColumn(4).setPreferredWidth(75);
+            jTable2.getColumnModel().getColumn(5).setResizable(false);
+            jTable2.getColumnModel().getColumn(5).setPreferredWidth(85);
+            jTable2.getColumnModel().getColumn(6).setResizable(false);
+            jTable2.getColumnModel().getColumn(6).setPreferredWidth(100);
+            jTable2.getColumnModel().getColumn(7).setResizable(false);
+            jTable2.getColumnModel().getColumn(7).setPreferredWidth(75);
+            jTable2.getColumnModel().getColumn(8).setResizable(false);
+            jTable2.getColumnModel().getColumn(8).setPreferredWidth(100);
+            jTable2.getColumnModel().getColumn(9).setResizable(false);
+            jTable2.getColumnModel().getColumn(9).setPreferredWidth(75);
+            jTable2.getColumnModel().getColumn(10).setResizable(false);
+            jTable2.getColumnModel().getColumn(10).setPreferredWidth(100);
+            jTable2.getColumnModel().getColumn(11).setResizable(false);
+            jTable2.getColumnModel().getColumn(11).setPreferredWidth(100);
+            jTable2.getColumnModel().getColumn(12).setResizable(false);
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,76 +201,87 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblDemora))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblDemora)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblClientes))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblPromCliente))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1234, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtSemanas, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(32, 32, 32)
-                                .addComponent(btnSimular))
+                                .addComponent(lblClientes)
+                                .addGap(603, 603, 603))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(7, 7, 7)
+                                .addComponent(lblPromCliente, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(109, 109, 109))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 9, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1126, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(30, 30, 30)
-                                .addComponent(jLabel9)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbDiasPorSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtSemanas, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(32, 32, 32)
+                                        .addComponent(btnSimular))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel8)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(30, 30, 30)
+                                        .addComponent(jLabel9)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(cmbDiasPorSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtSemanas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(btnSimular))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel9)
-                    .addComponent(cmbDiasPorSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(lblDemora))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(lblClientes))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(lblPromCliente))
-                .addGap(59, 59, 59))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(txtSemanas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(btnSimular))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(cmbDiasPorSemana, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(24, 24, 24)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE, false)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblPromCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lblDemora)
+                            .addComponent(lblClientes))))
+                .addGap(18, 18, 18))
         );
 
         jLabel5.getAccessibleContext().setAccessibleName("Promedio diario diario de tortas tiradas:");
@@ -248,9 +306,11 @@ public class GUI extends javax.swing.JFrame {
             if (tabla!=null)
                 mostrarTabla(tabla);   
 
-            lblDemora.setText(String.format("%.2f", r.getDemora()));
-            lblClientes.setText(String.format("%.2f", r.getCantClientes()));
-            lblPromCliente.setText("$ "+String.format("%.2f",r.getPromDemora()));
+            lblDemora.setText(String.format("%.2f", r.getDemora())+" minutos.");
+            int cant=r.getCantClientes();
+            String cantClientes=String.valueOf(cant);
+            lblClientes.setText(cantClientes + ".");
+            lblPromCliente.setText(String.format("%.2f",r.getPromDemora()) + " minutos.");
         }
     }//GEN-LAST:event_btnSimularActionPerformed
 
@@ -311,7 +371,9 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JLabel lblClientes;
     private javax.swing.JLabel lblDemora;
     private javax.swing.JLabel lblPromCliente;
@@ -321,12 +383,22 @@ public class GUI extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void mostrarTabla(ArrayList<Object[]> tabla) {
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTable2.getModel();
+        DefaultTableModel model2 = (DefaultTableModel) jTable1.getModel();
         Object[] temp;
+        String tiempoC,tiempoF;
         for (int i = 0; i < tabla.size(); i++) {
             temp=tabla.get(i);
+            if(temp[19].getClass()==Double.class)
+                tiempoC=Double.toString((double)temp[19]);
+            else
+                tiempoC=(String)temp[19];
+            if(temp[21].getClass()==Double.class)
+                tiempoF=Double.toString((double)temp[21]);
+            else
+                tiempoF=(String)temp[21];
             model.addRow(new Object[]{
-                i+1,
+                temp[24],
                 temp[0],
                 temp[1],
                 temp[2],
@@ -338,7 +410,10 @@ public class GUI extends javax.swing.JFrame {
                 temp[8],
                 temp[9],
                 temp[10],
-                temp[11],
+                temp[11]
+            });
+            model2.addRow(new Object[]{
+                temp[1],
                 temp[12],
                 temp[13],
                 temp[14],
@@ -346,23 +421,56 @@ public class GUI extends javax.swing.JFrame {
                 temp[16],
                 temp[17],
                 temp[18],
-                temp[19],
+                tiempoC.equals("99.0") ? "-": tiempoC,
                 temp[20],
-                temp[21],
+                tiempoF.equals("99.0") ? "-": tiempoF,
                 temp[22],
                 temp[23]
             });
         }
+        ajustarColumnas();
    }
     
     private void eliminarFilas(){
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
+        DefaultTableModel model2 = (DefaultTableModel) jTable2.getModel();
         model.setRowCount(0);
+        model2.setRowCount(0);
     }
 
     private boolean isNumeric(String s) {  
         return s != null && s.matches("[-+]?\\d*\\.?\\d+");  
     }  
+    private void ajustarColumnas(){
+        jTable2.getColumnModel().getColumn(0).setPreferredWidth(30);
+        jTable2.getColumnModel().getColumn(1).setPreferredWidth(120);
+        jTable2.getColumnModel().getColumn(2).setPreferredWidth(80);
+        jTable2.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(4).setPreferredWidth(120);
+        jTable2.getColumnModel().getColumn(5).setPreferredWidth(120);
+        jTable2.getColumnModel().getColumn(6).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(7).setPreferredWidth(125);
+        jTable2.getColumnModel().getColumn(8).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(9).setPreferredWidth(80);
+        jTable2.getColumnModel().getColumn(10).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(11).setPreferredWidth(120);
+        jTable2.getColumnModel().getColumn(12).setPreferredWidth(100);
+        
+        jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
+        jTable1.getColumnModel().getColumn(1).setPreferredWidth(50);
+        jTable1.getColumnModel().getColumn(2).setPreferredWidth(75);
+        jTable1.getColumnModel().getColumn(3).setPreferredWidth(50);
+        jTable1.getColumnModel().getColumn(4).setPreferredWidth(120);
+        jTable1.getColumnModel().getColumn(5).setPreferredWidth(100);
+        jTable1.getColumnModel().getColumn(6).setPreferredWidth(75);
+        jTable1.getColumnModel().getColumn(7).setPreferredWidth(90);
+        jTable1.getColumnModel().getColumn(8).setPreferredWidth(75);
+        jTable1.getColumnModel().getColumn(9).setPreferredWidth(90);
+        jTable1.getColumnModel().getColumn(10).setPreferredWidth(75);
+        jTable1.getColumnModel().getColumn(11).setPreferredWidth(90);
+        jTable1.getColumnModel().getColumn(12).setPreferredWidth(90);
+        //...
+    }
     
     private void cargarCombo(){
         cmbDiasPorSemana.removeAllItems();

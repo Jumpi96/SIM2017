@@ -53,7 +53,7 @@ public class GUI extends javax.swing.JFrame {
         txtHasta = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        cmbDiasPorSemana = new javax.swing.JComboBox<>();
+        cmbDiasPorSemana = new javax.swing.JComboBox<String>();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
 
@@ -141,7 +141,7 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel9.setText("Horas por día");
 
-        cmbDiasPorSemana.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbDiasPorSemana.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbDiasPorSemana.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmbDiasPorSemanaActionPerformed(evt);
@@ -302,12 +302,12 @@ public class GUI extends javax.swing.JFrame {
 
             s=new Simulacion(semanas,diasPorSemana,semanasDesde,semanasHasta);
             tabla=s.simular();
-            r=s.getResultados();
+            r = s.getResultados();
             if (tabla!=null)
                 mostrarTabla(tabla);   
 
             lblDemora.setText(String.format("%.2f", r.getDemora())+" minutos.");
-            int cant=r.getCantClientes();
+            int cant = r.getCantClientes();
             String cantClientes=String.valueOf(cant);
             lblClientes.setText(cantClientes + ".");
             lblPromCliente.setText(String.format("%.2f",r.getPromDemora()) + " minutos.");

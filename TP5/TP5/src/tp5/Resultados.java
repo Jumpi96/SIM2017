@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tp5;
 
-/**
- *
- * @author juampilorenzo
- */
+
 public class Resultados {
     private double demora;
     private int cantClientes;
@@ -43,8 +35,4 @@ public class Resultados {
     public void setPromDemora(double promDemora) {
         this.promDemora = promDemora;
     }
-
-    
-    
-    
 }

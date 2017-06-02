@@ -39,6 +39,7 @@ public class Simulacion {
     private int mostrarDesde;
     private int mostrarHasta;
     private double acumuladorEspera=0.0;
+    private int acumuladorClientes = 0;
 
     public Simulacion(int dias,int horas,int diasDesde, int diasHasta) {
         this.dias=dias;
@@ -89,6 +90,7 @@ public class Simulacion {
                         row[20]=tabla[1][20];
                         row[21] = "-";
                         row[22] = (Integer)tabla[1][22]+1;
+                        acumuladorClientes ++;
                         acumuladorEspera+=(double)row[19]-(double)row[1];
                         row[23] = acumuladorEspera; 
                         colaCarniceria.remove(0);
@@ -111,6 +113,7 @@ public class Simulacion {
                         row[20]=getCliente2(row);
                         row[21]=getFinAtencionCliente2(row);
                         row[22]=(Integer)tabla[1][22]+1;
+                        acumuladorClientes ++;
                         acumuladorEspera+=(double)row[21]-(double)row[1];
                         row[23]=acumuladorEspera;
                         colaFiambreria.remove(0);
@@ -135,6 +138,7 @@ public class Simulacion {
                             row[20]=tabla[1][20];
                             row[21]=tabla[1][21];
                             row[22]=(Integer)tabla[1][22]+1;
+                            acumuladorClientes ++;
                             acumuladorEspera+=(double)row[19]-(double)row[1];
                             row[23]=acumuladorEspera;
                             
@@ -158,6 +162,7 @@ public class Simulacion {
                             row[20]=getCliente2(row);
                             row[21]=getFinAtencionCliente2(row);
                             row[22]=(Integer)tabla[1][22]+1;
+                            acumuladorClientes ++;
                             acumuladorEspera+=(double)row[21]-(double)row[1];
                             row[23]=acumuladorEspera;
                             
@@ -182,6 +187,7 @@ public class Simulacion {
                         row[20]=tabla[1][20];
                         row[21]=tabla[1][21];
                         row[22] = (Integer)tabla[1][22]+1;
+                        acumuladorClientes ++;
                         row[23] = acumuladorEspera;  
                     }
                 }
@@ -519,6 +525,7 @@ public class Simulacion {
         else
             return "Fiambreria";
     }
+    
     ////Tengo que ver en la tabla cual de los 3 eventos se produce antes (llagada o fin de atención 1 o 2)
     private double getProximo(Object[] row){
         String estado=(String)row[0];
@@ -542,55 +549,6 @@ public class Simulacion {
             else
                 return finCliente2;
         }
-            
-                
-        
-            
-        /*float proximaLlegada = (float)tabla[1][4];
-        float finAtencionCliente1 = 0.0f;
-        float finAtencionCliente2 = 0.0f;
-        
-        float retorno = proximaLlegada;
-        
-        if (tabla[1][19].toString().compareTo("-")  != 0)
-            finAtencionCliente1 = (float)tabla[1][19];
-        if (tabla[1][21].toString().compareTo("-")  != 0)
-            finAtencionCliente2 = (float)tabla[1][21];
-        
-        if(finAtencionCliente1 == 0 && finAtencionCliente2 == 0){   
-        
-        }else if(finAtencionCliente1 == 0){
-            retorno = min (proximaLlegada, finAtencionCliente2);
-        }else if(finAtencionCliente2 == 0){
-            retorno = min (proximaLlegada, finAtencionCliente1);
-        }else{
-            retorno = min (proximaLlegada, finAtencionCliente1, finAtencionCliente2);
-        }*/
-    }
-    
-    private float min (float a, float b, float c){
-        
-        float retorno = c;
-        if(a <= b && a <= c) retorno = a;
-        else if (b <= a && b <= c) retorno = b;
-        
-        return retorno;
-    }
-    
-    private float min (float a, float b){
-        float retorno = b;
-        if(a < b) retorno = a;
-        
-        return retorno;
-    }
-    
-    //Si el reloj es igual a la hora de proxima llegada entonces el evento que se produce es de llegada
-    private boolean esLlegada (float reloj){
-        boolean retorno = false;
-        
-        if (reloj ==  (float)tabla[1][4]) retorno = true;
-        
-        return retorno;
     }
     
     private double getTiempoLlegada(float u, float rnd){
@@ -622,8 +580,7 @@ public class Simulacion {
     }
     
     public Resultados getResultados(){
-        Resultados r = new Resultados(acumuladorEspera,
-                (Integer)tabla[1][22]);
+        Resultados r = new Resultados(acumuladorEspera,acumuladorClientes);
         return r;
     }
     

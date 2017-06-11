@@ -291,6 +291,9 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSimularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimularActionPerformed
+        Auxiliar aux = new Auxiliar();
+        aux.show();
+        aux.toFront();
         if (validar()){
             Resultados r;
             ArrayList<Object[]> tabla;

@@ -348,7 +348,7 @@
         <Component class="javax.swing.JTable" name="jTable2">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="13" rowCount="0">
+              <Table columnCount="16" rowCount="0">
                 <Column editable="false" title="D&#xed;a" type="java.lang.Object"/>
                 <Column editable="false" title="Reloj" type="java.lang.Object"/>
                 <Column editable="false" title="Estado" type="java.lang.Object"/>
@@ -362,6 +362,9 @@
                 <Column editable="false" title="RND" type="java.lang.Object"/>
                 <Column editable="false" title="Demora total C" type="java.lang.Object"/>
                 <Column editable="false" title="Cola C" type="java.lang.Object"/>
+                <Column editable="false" title="RND" type="java.lang.Object"/>
+                <Column editable="false" title="Tiempo purga" type="java.lang.Object"/>
+                <Column editable="true" title="Purga" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="autoResizeMode" type="int" value="0"/>
@@ -423,6 +426,21 @@
                   <Renderer/>
                 </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="100" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                   <Title/>
                   <Editor/>
                   <Renderer/>

@@ -8,7 +8,6 @@ package tp5;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 /**
  *
@@ -154,11 +153,11 @@ public class GUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Día", "Reloj", "Estado", "RND", "Tiempo llegada", "Próx. llegada", "RND", "Tipo Cliente", "RND", "Demora C", "RND", "Demora total C", "Cola C"
+                "Día", "Reloj", "Estado", "RND", "Tiempo llegada", "Próx. llegada", "RND", "Tipo Cliente", "RND", "Demora C", "RND", "Demora total C", "Cola C", "RND", "Tiempo purga", "Purga"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -193,6 +192,9 @@ public class GUI extends javax.swing.JFrame {
             jTable2.getColumnModel().getColumn(11).setResizable(false);
             jTable2.getColumnModel().getColumn(11).setPreferredWidth(100);
             jTable2.getColumnModel().getColumn(12).setResizable(false);
+            jTable2.getColumnModel().getColumn(13).setResizable(false);
+            jTable2.getColumnModel().getColumn(14).setResizable(false);
+            jTable2.getColumnModel().getColumn(15).setResizable(false);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -414,7 +416,10 @@ public class GUI extends javax.swing.JFrame {
                 temp[8],
                 temp[9],
                 temp[10],
-                temp[11]
+                temp[11],
+                temp[25],
+                temp[26],
+                temp[27]
             });
             model2.addRow(new Object[]{
                 temp[24],
@@ -451,15 +456,18 @@ public class GUI extends javax.swing.JFrame {
         jTable2.getColumnModel().getColumn(1).setPreferredWidth(80);
         jTable2.getColumnModel().getColumn(2).setPreferredWidth(120);
         jTable2.getColumnModel().getColumn(3).setPreferredWidth(50);
-        jTable2.getColumnModel().getColumn(4).setPreferredWidth(120);
-        jTable2.getColumnModel().getColumn(5).setPreferredWidth(120);
+        jTable2.getColumnModel().getColumn(4).setPreferredWidth(75);
+        jTable2.getColumnModel().getColumn(5).setPreferredWidth(75);
         jTable2.getColumnModel().getColumn(6).setPreferredWidth(50);
-        jTable2.getColumnModel().getColumn(7).setPreferredWidth(125);
+        jTable2.getColumnModel().getColumn(7).setPreferredWidth(75);
         jTable2.getColumnModel().getColumn(8).setPreferredWidth(50);
         jTable2.getColumnModel().getColumn(9).setPreferredWidth(80);
         jTable2.getColumnModel().getColumn(10).setPreferredWidth(50);
-        jTable2.getColumnModel().getColumn(11).setPreferredWidth(120);
+        jTable2.getColumnModel().getColumn(11).setPreferredWidth(80);
         jTable2.getColumnModel().getColumn(12).setPreferredWidth(100);
+        jTable2.getColumnModel().getColumn(13).setPreferredWidth(50);
+        jTable2.getColumnModel().getColumn(14).setPreferredWidth(75);
+        jTable2.getColumnModel().getColumn(15).setPreferredWidth(75);
         
         jTable1.getColumnModel().getColumn(0).setPreferredWidth(30);
         jTable1.getColumnModel().getColumn(1).setPreferredWidth(80);

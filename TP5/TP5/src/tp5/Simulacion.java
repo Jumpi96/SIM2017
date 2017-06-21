@@ -28,6 +28,10 @@ public class Simulacion {
     [21]: Fin atención Cliente 2.
     [22]: Contador Clientes.
     [23]: Acumulador tiempos de espera.
+    [24]: Día.
+    [25]: RND.
+    [26]: Tiempo a purgar.
+    [27]: Tiempo purga.
     */
     
     private ArrayList<Object[]> tablaMostrar;
@@ -40,6 +44,8 @@ public class Simulacion {
     private int mostrarHasta;
     private double acumuladorEspera=0.0;
     private int acumuladorClientes = 0;
+    private double proximaPurga=0.0;
+    private SimContinua s=new SimContinua(0.1498);
 
     public Simulacion(int dias,int horas,int diasDesde, int diasHasta) {
         this.dias=dias;
@@ -63,9 +69,11 @@ public class Simulacion {
         for (int i = 0; i < dias; i++) {
             inicializarTabla(i);
             while((!((String)tabla[1][0]).equals("Fin del dia"))){
-                row = new Object[25];
+                row = new Object[28];
                 row[0] = getEstado();
                 row[1] = getProximo(row);
+                //TP6
+                gestionarPurga(row);
                 if(((String)row[0]).equals("Llegada cliente")){
                     row[2] = Math.random();
                     row[3] = getTiempoLlegada(0.5F, Float.parseFloat(row[2].toString()));
@@ -588,7 +596,7 @@ public class Simulacion {
     
     private void inicializarTabla(int i){
         boolean mostrar=i+1>=mostrarDesde && i+1<=mostrarHasta && mostrarDesde!=mostrarHasta;
-        this.tabla=new Object[2][25];  
+        this.tabla=new Object[2][28];  
         
         this.tabla[1][0] = "Inicio del dia";
         this.tabla[1][1] = Double.valueOf("0");
@@ -615,6 +623,7 @@ public class Simulacion {
         this.tabla[1][22] = 0;
         this.tabla[1][23] = acumuladorEspera;
         this.tabla[1][24] = i+1;
+        gestionarPurga(this.tabla[1]);
         
         if (mostrar)
             tablaMostrar.add(new Object[]{
@@ -642,7 +651,10 @@ public class Simulacion {
                 this.tabla[1][21],
                 this.tabla[1][22],
                 this.tabla[1][23],
-                this.tabla[1][24]
+                this.tabla[1][24],
+                this.tabla[1][25],
+                this.tabla[1][26],
+                this.tabla[1][27]
             });
     }
     private Object[] getProxCliente(double reloj){
@@ -667,32 +679,25 @@ public class Simulacion {
         }       
         return r;
     }
-        /*
-    [0]: Estado.
-    [1]: Reloj.
-    [2]: RND Llegada.
-    [3]: Tiempo llegada.
-    [4]: Próxima llegada.
-    [5]: RND Tipo cliente.
-    [6]: Tipo cliente.
-    [7]: RND Demora carnicería.
-    [8]: Demora carnicería.
-    [9]: RND Carnicería+Verdulería.
-    [10]: Demora total carnicería.
-    [11]: Cola carnicería.
-    [12]: RND Demora fiambrería.
-    [13]: Demora fiambrería.
-    [14]: RND Fiambrería+Verdulería.
-    [15]: Demora total fiambrería.
-    [16]: Cola fiambrería.
-    [17]: Demora verdulería.
-    [18]: Estado Cliente 1.
-    [19]: Fin atención Cliente 1.
-    [20]: Cliente 2.
-    [21]: Fin atención Cliente 2.
-    [22]: Contador Clientes.
-    [23]: Acumulador tiempos de espera.
-    */
+    
+    private void gestionarPurga(Object[] row) {
+        if(proximaPurga<=(double)row[1]){
+            row[25]=Math.random();
+            row[26]=s.getTiempoPurga((double)row[25]);
+            row[27]=(double)row[1]+(double)row[26];
+            proximaPurga=(double)row[27];
+        }
+        else{
+            row[25]="-";
+            row[26]="-";
+            row[27]="-";
+        }
+            
+        
+            
+        
+            
+    }
     
     
 }

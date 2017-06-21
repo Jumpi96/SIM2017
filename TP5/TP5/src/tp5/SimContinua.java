@@ -52,4 +52,14 @@ public class SimContinua {
         return C+h*dC;
     }
     
+    public double getTiempoPurga(double C){
+        Double[] d;
+        for (int i = 0; i < tabla.size(); i++) {
+            d=tabla.get(i);
+            if(d[1]>C*100)
+                return d[0];
+        }
+        return 0.0;
+    }
+    
 }

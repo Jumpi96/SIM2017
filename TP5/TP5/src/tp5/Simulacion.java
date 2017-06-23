@@ -24,7 +24,7 @@ public class Simulacion {
     [17]: Demora verdulería.
     [18]: Estado Cliente 1.
     [19]: Fin atención Cliente 1.
-    [20]: Cliente 2.
+    [20]: Estado Cliente 2.
     [21]: Fin atención Cliente 2.
     [22]: Contador Clientes.
     [23]: Acumulador tiempos de espera.
@@ -44,8 +44,7 @@ public class Simulacion {
     private int mostrarHasta;
     private double acumuladorEspera=0.0;
     private int acumuladorClientes = 0;
-    private double proximaPurga=0.0;
-    private SimContinua s=new SimContinua(0.1498);
+    private SimContinua simContinua=new SimContinua(0.1498);
 
     public Simulacion(int dias,int horas,int diasDesde, int diasHasta) {
         this.dias=dias;
@@ -370,6 +369,9 @@ public class Simulacion {
                     tabla[1][21]=row[21];
                 tabla[1][22]=row[22];
                 tabla[1][23]=row[23];
+                tabla[1][27]=row[27];
+                
+                
                 row[24]=i+1;
                 if(i+1>=mostrarDesde && i+1<=mostrarHasta && mostrarDesde!=mostrarHasta){
                     tablaMostrar.add(row);                    
@@ -623,7 +625,9 @@ public class Simulacion {
         this.tabla[1][22] = 0;
         this.tabla[1][23] = acumuladorEspera;
         this.tabla[1][24] = i+1;
-        gestionarPurga(this.tabla[1]);
+        this.tabla[1][25] = Math.random();
+        this.tabla[1][26] = simContinua.getTiempoPurga((double)this.tabla[1][25]);
+        this.tabla[1][27]= (double)tabla[1][1] + (double)this.tabla[1][26];
         
         if (mostrar)
             tablaMostrar.add(new Object[]{
@@ -677,26 +681,29 @@ public class Simulacion {
                 }
             }
         }       
+        
         return r;
     }
     
+    
     private void gestionarPurga(Object[] row) {
-        if(proximaPurga<=(double)row[1]){
-            row[25]=Math.random();
-            row[26]=s.getTiempoPurga((double)row[25]);
-            row[27]=(double)row[1]+(double)row[26];
-            proximaPurga=(double)row[27];
+        if((double)tabla[1][27]<=(double)row[1]){
+            row[25] = Math.random();
+            row[26] = simContinua.getTiempoPurga((double)row[25]);
+            row[27] = (double)row[1]+(double)row[26];
+            
+            if (tabla[1][18].toString().equals("Atendiendo")){
+                //Tu vieja en tanga
+            }
+            else{
+                //TU VIEJA EN TANGA
+            }
         }
         else{
             row[25]="-";
             row[26]="-";
-            row[27]="-";
+            row[27] = tabla[1][27];
         }
-            
-        
-            
-        
-            
     }
     
     

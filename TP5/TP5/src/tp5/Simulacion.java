@@ -44,6 +44,8 @@ public class Simulacion {
     private int mostrarHasta;
     private double acumuladorEspera=0.0;
     private int acumuladorClientes = 0;
+    private boolean purgando=false;
+    private boolean estabaAtendiendo=false;
     private SimContinua simContinua=new SimContinua(0.1498);
 
     public Simulacion(int dias,int horas,int diasDesde, int diasHasta) {
@@ -71,7 +73,6 @@ public class Simulacion {
                 row = new Object[28];
                 row[0] = getEstado();
                 row[1] = getProximo(row);
-                //TP6
                 gestionarPurga(row);
                 if(((String)row[0]).equals("Llegada cliente")){
                     row[2] = Math.random();
@@ -80,7 +81,7 @@ public class Simulacion {
                     row[5] = (double) Math.random();
                     row[6] = addCliente((double)row[5],(double)row[1]);
                     if(((String)row[6]).equals("Carniceria")&&
-                            (!((String)tabla[1][18]).equals("Atendiendo"))){
+                            (((String)tabla[1][18]).equals("Libre"))){
                         row[7] = (float) Math.random();
                         row[8] = getDemoraCarniceria((float)row[7]);
                         row[9]= (float) Math.random();
@@ -127,8 +128,8 @@ public class Simulacion {
                     }
                     else if(((String)row[6]).equals("Verduleria") && 
                             (!((String)tabla[1][20]).equals("Atendiendo")
-                             || !((String)tabla[1][18]).equals("Atendiendo"))){
-                        if(!((String)tabla[1][18]).equals("Atendiendo")){
+                             || ((String)tabla[1][18]).equals("Libre"))){
+                        if(((String)tabla[1][18]).equals("Libre")){
                             row[7]="-";
                             row[8]="-";
                             row[9]="-";
@@ -174,6 +175,10 @@ public class Simulacion {
                             row[23]=acumuladorEspera;
                             
                             row[6]="Verduleria (F)";
+                            //control
+                            if (colaFiambreria.isEmpty())
+                                System.out.println("");
+                                    
                             colaFiambreria.remove(0);
                         }
                     }
@@ -220,9 +225,101 @@ public class Simulacion {
                     row[20] = "Libre";
                     row[21] = "-";
                     row[22] = (Integer)tabla[1][22];
-                    row[23] = acumuladorEspera;  
+                    row[23] = acumuladorEspera;
                 }
-                else{
+                else if(((String)row[0]).equals("Purga")){
+                    row[2] = "-";
+                    row[3] = "-";
+                    row[4] = tabla[1][4];
+                    row[5] = "-";
+                    row[6] = "-";
+                    row[7] = "-";
+                    row[8] = "-";
+                    row[9] = "-";
+                    row[10] = "-";
+                    row[11] = getColaCarniceria(null);
+                    row[12] = "-";
+                    row[13] = "-";
+                    row[14] = "-";
+                    row[15] = "-";
+                    row[16] = getColaFiambreria(null);
+                    row[17] = "-";
+                    if (tabla[1][18].equals("Libre")){
+                        row[18] = "Purgando";
+                        row[19]=tabla[1][19];
+                        row[20]=tabla[1][20];
+                        row[21]=tabla[1][21];
+                        row[22]=(Integer)tabla[1][22];
+                        row[23]=acumuladorEspera;
+                        tabla[1][27]=(double)tabla[1][27]+10;
+                        estabaAtendiendo=false;
+                    }
+                    else{
+                        row[18] = "Purgando";
+                        row[19] = "-";
+                        row[20] = tabla[1][20];
+                        row[21]=tabla[1][21];
+                        row[22] = (Integer)tabla[1][22];
+                        row[23] = acumuladorEspera+10;
+                        tabla[1][27]=(double)tabla[1][27]+10;
+                        estabaAtendiendo=true;
+                        penalizarPorPurga();
+                        row[19]=tabla[1][19];
+                    }
+                }
+                else if(((String)row[0]).equals("Fin de purga")){
+                    row[2] = "-";
+                    row[3] = "-";
+                    row[4] = tabla[1][4];
+                    row[5] = "-";
+                    row[6] = "-";
+                    row[7] = "-";
+                    row[8] = "-";
+                    row[9] = "-";
+                    row[10] = "-";
+                    row[11] = getColaCarniceria(null);
+                    row[12] = "-";
+                    row[13] = "-";
+                    row[14] = "-";
+                    row[15] = "-";
+                    row[16] = getColaFiambreria(null);
+                    row[17] = "-";
+                    row[19] = "-";
+                    row[20] = tabla[1][20];
+                    row[21] = "-";
+                    row[22] = (Integer)tabla[1][22];
+                    row[23] = acumuladorEspera;
+                    if (estabaAtendiendo)
+                        row[18]="Atendiendo";
+                    else
+                        if(colaCarniceria.isEmpty())
+                            row[18]="Libre";
+                        else{
+                            temp=getProxCliente((double)-1);
+                            row[7] = (float) Math.random();
+                            row[8] = getDemoraCarniceria((float)row[7]);
+                            row[9]= (float) Math.random();
+                            row[10]= getDemoraTotalCarniceria((float)row[8], (float)row[9]);
+                            row[11]=getColaCarniceria(row);
+                            row[12]="-";
+                            row[13]="-";
+                            row[14]="-";
+                            row[15]="-";
+                            row[16]=tabla[1][16];
+                            row[17]="-";
+                            row[18]="Atendiendo";//getCliente1(row);
+                            row[19]=getFinAtencionCliente1(row);
+                            row[20]=tabla[1][20];
+                            row[21]="-";
+                            row[22]=(Integer)tabla[1][22];
+                            acumuladorEspera+=(double)row[19]-(double)temp[1];
+                            row[23]=acumuladorEspera;
+                            colaCarniceria.remove(0);
+                            
+                        }    
+                }
+                else
+                {
                     row[2]="-";
                     row[3]="-";
                     row[4]=tabla[1][4];
@@ -242,6 +339,7 @@ public class Simulacion {
                             row[15]="-";
                             row[16]=tabla[1][16];
                             row[17]="-";
+                            
                             row[18]=getCliente1(row);
                             row[19]=getFinAtencionCliente1(row);
                             row[20]=tabla[1][20];
@@ -340,20 +438,9 @@ public class Simulacion {
                             row[20]="Libre";
                             row[21]=Double.valueOf("10000");
                         }
-                        //row[20]=getCliente2(row);
-                        //row[21]="-";
                         row[22]=(Integer)tabla[1][22];
                         row[23]=acumuladorEspera;
                     }
-                }
-                
-                /*
-                CONTROL
-                
-                 */ 
-                
-                if((double)row[1]==(double)tabla[1][1] && !((String)row[0]).equals("Fin del dia")){
-                    System.out.println("");                    
                 }
 
                 tabla[1][0]=row[0];
@@ -369,7 +456,7 @@ public class Simulacion {
                     tabla[1][21]=row[21];
                 tabla[1][22]=row[22];
                 tabla[1][23]=row[23];
-                tabla[1][27]=row[27];
+                //tabla[1][27]=row[27];
                 
                 
                 row[24]=i+1;
@@ -381,6 +468,13 @@ public class Simulacion {
             }
         }
         return tablaMostrar;
+    }
+    private void penalizarPorPurga(){
+        if(!colaCarniceria.isEmpty()){
+            tabla[1][19]=(double)tabla[1][19]+10;
+            acumuladorEspera+=10;
+            estabaAtendiendo=true;
+        }
     }
     private String getColaCarniceria(Object[] obj){
         String cadena="";
@@ -460,50 +554,57 @@ public class Simulacion {
         double proxLlegada=Float.parseFloat(tabla[1][4].toString());
         double finCarniceria=(double)tabla[1][19];
         double finFiambreria=(double)tabla[1][21];
-        
+        String returnOriginal="";
         //finHora implica que, sacando finalizaciones no hay mas llegadaCliente
         boolean finHora=(double)tabla[1][4]>horas*60;
-                //((String)tabla[1][18]).equals("Libre") &&
-                //((String)tabla[1][20]).equals("Libre");
         
-        /*if (finHora){
-            if (finCarniceria==99){
-                tabla[1][19]=0;
-                finCarniceria=(double)tabla[1][19];
-            }
-            if (finFiambreria==99){
-                tabla[1][21]=0;
-                finFiambreria=(double)tabla[1][21];
-            }
-        }*/
         if (!finHora){
             if(proxLlegada<finCarniceria && proxLlegada<finFiambreria)
-                return("Llegada cliente");
+                returnOriginal="Llegada cliente";
             else if(finCarniceria<proxLlegada && finCarniceria<finFiambreria)
-                return("Fin Atencion C");
+                returnOriginal="Fin Atencion C";
             else
-                return("Fin Atencion F");
+                returnOriginal="Fin Atencion F";
         }
         else{
             if (finCarniceria==finFiambreria)
-                return "Fin del dia";
+                returnOriginal= "Fin del dia";
             else if(finCarniceria<finFiambreria)
                 if(colaCarniceria.isEmpty() && ((String)tabla[1][18]).equals("Libre"))
                     if(((String)tabla[1][20]).equals("Atendiendo"))
-                        return "Fin Atencion F";
+                        returnOriginal="Fin Atencion F";
                     else
-                        return "Fin del dia";
+                        returnOriginal= "Fin del dia";
                 else
-                    return "Fin Atencion C";
+                    returnOriginal= "Fin Atencion C";
             else
                 if(colaFiambreria.isEmpty() && ((String)tabla[1][20]).equals("Libre"))
                     if(((String)tabla[1][18]).equals("Atendiendo"))
-                        return "Fin Atencion C";
+                        returnOriginal= "Fin Atencion C";
                     else
-                        return "Fin del dia";
+                        returnOriginal= "Fin del dia";
                 else
-                    return "Fin Atencion F";
-        }     
+                    returnOriginal= "Fin Atencion F";
+        }
+        switch (returnOriginal){
+            case "Llegada cliente":
+                if((double)tabla[1][4]>(double)tabla[1][27])
+                    returnOriginal="Purga";
+                break;
+            case "Fin Atencion C":
+                if((double)tabla[1][19]>(double)tabla[1][27])
+                    returnOriginal="Purga";
+                break;
+            case "Fin Atencion F":
+                if((double)tabla[1][21]>(double)tabla[1][27])
+                    returnOriginal="Purga";
+                break;
+            case "Fin del dia":
+                break;
+        }
+        if (returnOriginal.equals("Purga") && purgando)
+            return "Fin de purga";
+        return returnOriginal;
     }
     
     private String addCliente(double rnd,double reloj){
@@ -549,6 +650,14 @@ public class Simulacion {
             return (double)tabla[1][19];
         else if(estado.equals("Fin Atencion F"))
             return (double)tabla[1][21];
+        else if(estado.equals("Purga")){
+            purgando=true;
+            return (double)tabla[1][27];
+        }
+        else if(estado.equals("Fin de purga")){
+            purgando=false;
+            return (double)tabla[1][27];
+        }
         else{
             double proxLlegada =(double)tabla[1][1];
             double finCliente1 = (double)tabla[1][19]==10000 ? 0 : (double)tabla[1][19];
@@ -663,7 +772,7 @@ public class Simulacion {
     }
     private Object[] getProxCliente(double reloj){
         Object[] r=null;
-        if(reloj==(double)tabla[1][19]){
+        if(reloj==(double)tabla[1][19] || reloj==-1){
             if(colaCarniceria.size()!=0){
                 r=colaCarniceria.get(0);
                 if (((String)r[0]).equals("Verduleria")){
@@ -687,22 +796,16 @@ public class Simulacion {
     
     
     private void gestionarPurga(Object[] row) {
-        if((double)tabla[1][27]<=(double)row[1]){
+        if(((String)row[0]).equals("Fin de purga")){
             row[25] = Math.random();
             row[26] = simContinua.getTiempoPurga((double)row[25]);
             row[27] = (double)row[1]+(double)row[26];
-            
-            if (tabla[1][18].toString().equals("Atendiendo")){
-                //Tu vieja en tanga
-            }
-            else{
-                //TU VIEJA EN TANGA
-            }
+            tabla[1][27]=row[27];
         }
         else{
             row[25]="-";
             row[26]="-";
-            row[27] = tabla[1][27];
+            row[27]="-";
         }
     }
     
